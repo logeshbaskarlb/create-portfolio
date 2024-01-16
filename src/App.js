@@ -1,4 +1,5 @@
 import "./App.css";
+import '@progress/kendo-theme-material/dist/all.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import { useEffect, useState } from "react";
@@ -7,9 +8,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ReloadData, SetPortfolioData, Showloading } from "./redux/rootSlice";
 import Admin from "./Pages/Admin/Admin";
-import Login from "./Authentication/Login";
-import Register from "./Authentication/Register";
-import './Authentication/Login.css'
+import Dashboard from "./Dashboard/Dashboard";
+import Pdf from "./Components/Export/Pdf";
+import Home2 from "./Pages/Home2/Home2";
+
 
 // import { config } from './config/Config';
 function App() {
@@ -40,11 +42,6 @@ function App() {
     }
   },[reloadData])
 
-  const [isLoginForm , setIsLoginForm] = useState(true);
-
-    const toggleForm = () =>{
-        setIsLoginForm((prev) => !prev)
-    }
   return (
     <>
       <BrowserRouter>
@@ -52,12 +49,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element= {<Login />}/>
-{/* //      //     //{} isLoginForm ? <Login toggleForm={toggleForm} /> : <Register toggleForm={toggleForm} />
-//         }  */}
-
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/export-to-pdf" element={<Pdf/>} />
         </Routes>
-       
+        
       </BrowserRouter>
     </>
   );

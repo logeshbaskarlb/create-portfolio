@@ -6,9 +6,9 @@ function SectionTitle({
     
 ) {
   return (
-    <div className='flex gap-10 items-center py-10'>
-        <h1 className='text-2xl text-white font-semibold'>{title}</h1>
-        <div className='w-60 h-[1px] bg-tertiary'></div>
+    <div className='flex gap-8 items-center py-5'>
+        <h1 className='text-4xl text-sixth font-semibold'>{title}</h1>
+        <div className='w-60 h-[1px] bg-sixth'></div>
     </div>
   )
 }

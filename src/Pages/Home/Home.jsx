@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../../Components/Header";
 import Intro from "./Intro";
-import About from "./About";
 import Experiences from "./Experiences";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import LeftSide from "./LeftSide";
 import { useSelector } from "react-redux";
+import About from "./About";
 
 function Home() {
   const { portfolioData} = useSelector((state)=>state.root)

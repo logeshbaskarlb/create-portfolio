@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 *{
-    font-family: 'Montserrat', sans-serif;
+  font-family: Roboto, sans-serif;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -14,15 +14,16 @@
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background-color: #0A192F;
-    width: 8px;
+    background-color: black ;
+    width: 1px;
 
   }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #013f3c7f; 
+    background: #0000007f; 
     border-radius: 3px;
+    width: 2px;
   }
 
   .header h1{
