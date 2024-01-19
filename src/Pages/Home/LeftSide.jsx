@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 function LeftSide() {
+
+  
   return (
     <div className='fixed left-0 bottom-0 px-10 sm:static'>
     <div className='flex flex-col items-center'>
@@ -25,9 +28,8 @@ function LeftSide() {
         <a href="/">
         <i class="ri-github-fill text-gray-600 text-4xl"></i>
         </a>
-        </div>
-
-        </div>
+    </div>
+    </div>
 
         <div className='w-[1px] h-32 bg-[#125f63] sm:hidden'>
 

@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SectionTile2 from '../../Components/SectionTile2';
 import { useSelector } from 'react-redux';
 
 function Project2() {
 
-    const [selectedItem ,setSelectedItem ] = useState(0);
     const {portfolioData} = useSelector((state)=>state.root);
     const { project } = portfolioData
 
@@ -12,45 +11,28 @@ function Project2() {
     <div>
           <SectionTile2 title="Projects" />
 
-<div className="flex py-10 gap-20 sm:flex-col">
-  <div
-    className="flex flex-col gap-10 border-l-2 border-[#135e4c82] w-1/3 
-      sm:flex-row sm:overflow-x-scroll sm:w-full"
-  >
-    {project.map((project, index) => (
-      <div
-        onClick={() => {
-          setSelectedItem(index);
-        }}
-        className="cursor-pointer"
-      >
-        <h1
-          className={`text-xl px-10
-              ${
-                selectedItem === index
-                  ? "text-sixth border-fifth border-l-4 -ml-[2px] bg-white py-3 sm:w-40"
-                  : "text-fifth"
-              } `}
-        >
-          {project.title}
-        </h1>
+          <div className="mx-20 flex py-10 gap-20 w-3/4 sm:flex-col">
+        <div className="flex flex-wrap gap-10 sm:flex-col">
+          {project.map((projects, index) => (
+            <div key={index} className="bg-white p-4 gap-2 rounded-md">
+              <h1 className="text-2xl text-black p-4 flex justify-center">
+                {" "} 
+                <span className="text-sixth"> Title :  </span>{"  "}  
+                {projects.title}
+              </h1>
+              <img src={projects.image} width={"200px"} className="m-5" alt="Project PNG" />
+              <h1 className="text-xl text-black">
+                <span className="text-sixth">Description : </span>
+                {projects.description}
+              </h1>
+              <h1 className="text-xl text-black">
+                <span className="text-sixth">Link : </span>
+               <a href={projects.link}>Click Here</a>
+              </h1>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-
-  <div className="flex items-center justify-center gap-10 sm:flex-col">
-      <img src={project[selectedItem].image} alt="" className="h-60 w-72"/>
-  <div className="flex flex-col gap-5">
-    <h1 className="text-sixth text-xl">
-      {project[selectedItem].title}
-    </h1>
-   
-    <h1 className="text-fifth text-xl">
-      {project[selectedItem].describe }
-    </h1>
-  </div>
-  </div>
-</div>
     </div>
   )
 }

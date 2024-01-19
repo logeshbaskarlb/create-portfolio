@@ -23,6 +23,7 @@ function AdminAbout() {
     })
     dispatch(HideLoading())
     if(response.data.success){
+      
       message.success(response.data.message)
     }else{
       message.error(response.data.message)
@@ -40,8 +41,8 @@ function AdminAbout() {
         initialValues={{...portfolioData.about,
         skills : portfolioData.about.skills.join(" , ")}}
       >
-        <Form.Item name="lottieURL" label="Lottie URL">
-          <input placeholder="Lottie URL" />
+        <Form.Item name="lottieURL" label="URL">
+          <input placeholder="URL" />
         </Form.Item>
        
         <Form.Item name="description1" label="Description1">

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import AdminExperiences from "./AdminExperiences";
 import AdminProjects from "./AdminProjects";
 import AdminContact from "./AdminContact";
-import { Link } from "react-router-dom";
+// import AdminSocialMedia from "./AdminSocialMedia";
 
 const items = [
   {
@@ -30,11 +30,13 @@ const items = [
     label: "Projects",
     children: <AdminProjects />,
   },
+
   {
     key: "5",
     label: "Contacts",
     children: <AdminContact />,
   },
+ 
 ];
 function Admin() {
   const { portfolioData } = useSelector((state) => state.root);
@@ -45,7 +47,6 @@ function Admin() {
    <div className="flex">
         <h1 className="text-2xl px-5 py-2 text-primary">Portfolio Admin</h1>
        <div className="text-2xl px-5 py-2 text-primary flex justify-end">
-       <Link to={"/home"}> Home </Link>
        </div>
    </div>
       {portfolioData && (

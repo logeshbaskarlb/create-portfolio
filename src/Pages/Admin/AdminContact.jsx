@@ -1,19 +1,29 @@
 import { Form, message } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import {  Link, useLocation, useNavigate } from "react-router-dom";
+
 
 function AdminContact() {
+
 
   const location = useLocation();
   const { state } =location;
   const dispatch = useDispatch();
   const { portfolioData , selectedHome } = useSelector((state) => state.root);
   console.log(selectedHome);
-
+  const navigate = useNavigate()
+  const [pdfKey,setPdfKey] = useState(0)
+  const [shouldReload, setShouldReload] = useState(false);
   
+  // if(selectedHome === "home1"){
+  //   navigate(<Home />)
+  // }else {
+  //   navigate(<Home2 />)
+  // }
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const onFinish = async (values) => {
    try {
     dispatch(Showloading())
@@ -25,7 +35,9 @@ function AdminContact() {
     dispatch(HideLoading())
     if(response.data.success){
       message.success(response.data.message)
-    }else{
+      setShouldReload(true);
+      setFormSubmitted(true);
+      }else{
       message.error(response.data.message)
     }
    } catch (error) {
@@ -69,12 +81,16 @@ function AdminContact() {
          
         <div className="absolute" >
           <Link className="px-10 py-2 bg-primary text-white" 
-          to={"/pdf"}
+          to={{
+            pathname : "/select-template",
+            state : { 
+            pdfKey : pdfKey + 1 , shouldReload : shouldReload
+            }
+          }}
           type="submit">
             Export to PDF
           </Link>
         </div>
-      
       
         <div className="flex justify-end w-full" >
           <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>

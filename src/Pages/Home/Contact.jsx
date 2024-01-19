@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 function Contact() {
   const { portfolioData } = useSelector((state) => state.root);
-  const { contact } = portfolioData;
+  const { contact  } = portfolioData;
   
   return (
     <div>
@@ -21,12 +21,14 @@ function Contact() {
           <p className="text-tertiary">{"}"}</p>
         </div>
 
-        <div className="h-[400px] ">
-          <dotlottie-player
+        <div className="h-[400px] pt-12 ">
+          {/* <dotlottie-player
             src="https://lottie.host/c54ada9d-77af-48e9-9a5d-9c8d5ed82ce6/0mbYvzMQRi.json"
             background="transparent"
             autoplay
-          ></dotlottie-player>
+          ></dotlottie-player> */}
+          <img src="https://cdn.pixabay.com/photo/2016/12/15/12/24/contact-us-1908762_1280.png" alt=""
+          width={"750px"} />
         </div>
       </div>
     </div>

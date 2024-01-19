@@ -16,6 +16,7 @@ import Login from "./Authentication/Login"
 import Registration from "./Authentication/Registration"
 import ForgetPassword from "./Authentication/ForgetPassword"
 import ResetPassword from "./Authentication/ResetPassword"
+import Pdf2 from "./PDF2/Pdf2";
 
 function App() {
 
@@ -64,6 +65,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/pdf" element={<Pdf/>} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/select-template" element={<Pdf2 />} />
         </Routes>
       </BrowserRouter>
     

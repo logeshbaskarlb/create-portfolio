@@ -71,7 +71,7 @@ function AdminExperiences() {
       </div>
       <div className="grid grid-cols-4 gap-5 mt-5 sm:grid-cols-1">
         {experience?.map((experiences, key) => (
-          <div className="shadow border p-5 border-gray-400">
+          <div key={key} className="shadow border p-5 border-gray-400">
             <h1 className="text-primary text-xl font-bold">
               {experiences.period}
             </h1>

@@ -28,6 +28,9 @@ const rootSlice = createSlice({
     setSelectedHome: (state, action) => {
       state.selectedHome = action.payload;
     },
+    setNewValue: (state, action) => {
+      state.newValue = action.payload;
+    },
    
   },
 });
@@ -40,5 +43,7 @@ export const {
   ReloadData,
   setShowPassword,
   showLoading,
-  setSelectedHome
+  setSelectedHome,
+  setNewValue,
+  
 } = rootSlice.actions;

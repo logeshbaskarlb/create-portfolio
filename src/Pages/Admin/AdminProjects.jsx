@@ -73,7 +73,7 @@ function AdminProjects() {
       </div>
       <div className="grid grid-cols-4 gap-5 mt-5 sm:grid-cols-1">
         {project?.map((projects, key) => (
-          <div className="shadow border p-5 border-gray-400">
+          <div key={key} className="shadow border p-5 border-gray-400">
             <h1 className="text-primary text-xl font-bold">
               {projects.title}
             </h1>

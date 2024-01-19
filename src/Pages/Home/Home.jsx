@@ -1,5 +1,4 @@
-import React from "react";
-import Header from "../../Components/Header";
+import React, { useRef } from "react";
 import Intro from "./Intro";
 import Experiences from "./Experiences";
 import Projects from "./Projects";
@@ -8,27 +7,38 @@ import Footer from "./Footer";
 import LeftSide from "./LeftSide";
 import { useSelector } from "react-redux";
 import About from "./About";
+import { PDFExport } from "@progress/kendo-react-pdf";
+import { Button } from "antd";
 
 function Home() {
-  
-  const { portfolioData} = useSelector((state)=>state.root)
+  const { portfolioData } = useSelector((state) => state.root);
+  const pdfExportComponent = useRef(null);
+  const handleExportWithComponent = (event) => {
+    pdfExportComponent.current.save();
+  };
 
   return (
     <div>
-      <Header />
-    {
-      portfolioData  && (
-        <div className="bg-primary px-40 sm:px-8">
-        <Intro />
-        <About />
-        <Experiences />
-        <Projects />
-        <Contact />
-        <Footer/>
-        <LeftSide />
+      {portfolioData && (
+        <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
+          <div className="bg-primary px-40 sm:px-8">
+            <Intro />
+            <About />
+            <Experiences />
+            <Projects />
+            <Contact />
+            <Footer />
+            <LeftSide />
+          </div>
+        </PDFExport>
+      )}
+      <div>
+        <Button primary={true} 
+        className="flex justify-center bg-primary text-white"
+        onClick={handleExportWithComponent}>
+          Export Portfolio
+        </Button>
       </div>
-      )
-    }
     </div>
   );
 }

@@ -1,12 +1,12 @@
-import React  from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import {setSelectedHome} from "../redux/rootSlice"
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {setSelectedHome} from "../redux/rootSlice"
-function Dashboard() {
 
 
+function Pdf2() {
   const selectedHome = useSelector((state)=> state.root.selectedHome);
   const dispatch  = useDispatch();
 
@@ -20,17 +20,15 @@ function Dashboard() {
     {
       id: 1,
       src: image,
-      link: "/admin",
-      homeKey: "home1",
+      link: "/home",
+     
     },
     {
       id: 2,
       src: image2,
       link: "/admin",
-      homeKey: "home2",
     },
   ];
-
   return (
     <div className="bg-primary h-[100%] m-0 p-0">
       <div
@@ -39,18 +37,16 @@ function Dashboard() {
       >
         <div className=" p-4  flex flex-col justify-evenly ">
           <div className="pb-8">
-            <p className="text-4xl font-bold inline border-b-4 border-gray-500">
-              Welcome to Dashboard
+            <p className="text-4xl font-bold py-5 border-b-4 border-gray-500">
+            If you want to change the Template or else select the same template
             </p>
-            <p className="py-6">You can choose your own templete below</p>
-            <p className="py-0">
-            Choose the color as your wish and
+            <p className="py-6">
             <span className="text-sixth">Get your Portfolio</span>
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 grid-cols-3 mx-10 gap-8 sm:px-5">
-            {items.map(({ id, src, link,homeKey }) => (
+            {items.map(({ id, src, link }) => (
               <div
                 key={id}
                 className="shadow-md shadow-gray-600 rounded-lg overflow-hidden"
@@ -63,14 +59,7 @@ function Dashboard() {
                 <div className="flex items-center justify-center">
                   <Link
                     className="w-1/2 px-6 py-3 m-4 duration-200  hover:bg-pink  bg-white text-black  rounded-lg"
-                    to={{
-                      pathname: "/admin",
-                      state: { 
-                        exportToPDF: true, 
-                        selectedHome: homeKey 
-                      },
-                    }}
-                    onClick={()=> handleSelectHome(homeKey)}
+                    to={link}
                   >
                     Select
                   </Link>
@@ -87,4 +76,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Pdf2;
