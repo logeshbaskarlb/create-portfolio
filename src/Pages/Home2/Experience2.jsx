@@ -10,7 +10,7 @@ function Experience2() {
     <div>
       <SectionTile2 title="Experience" />
 
-      <div className="mx-20 flex py-10 gap-20 w-3/4  sm:flex-col">
+      <div className="mx-20 flex justify-evenly py-10 gap-20 w-3/4  sm:flex-col">
         <div className="flex flex-wrap gap-10  sm:flex-col ">
           {experience.map((exp, index) => (
             <div key={index} className="bg-white p-4 rounded-md">

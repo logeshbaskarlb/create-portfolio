@@ -7,7 +7,6 @@ import Footer2 from "./Footer2";
 import Intro2 from "./Intro2";
 import LeftSide2 from "./LeftSide2";
 import Project2 from "./Project2";
-import Header2 from "../../Components/Header2";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "antd";
 
@@ -20,7 +19,6 @@ function Home2() {
 
   return (
     <div>
-      <Header2 />
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
           <div className="bg-fourth  px-40 sm:px-8">
@@ -34,9 +32,9 @@ function Home2() {
           </div>
         </PDFExport>
       )}
-      <div>
+       <div className="flex justify-center m-10 pb-5">
         <Button primary={true} 
-        className="flex justify-center bg-sixth text-white"
+        className=" bg-sixth text-white"
         onClick={handleExportWithComponent}>
           Export Portfolio
         </Button>

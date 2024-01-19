@@ -21,7 +21,7 @@ function Home() {
     <div>
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
-          <div className="bg-primary px-40 sm:px-8">
+          <div className="bg-primary px-40 sm:px-8 sm:py-5">
             <Intro />
             <About />
             <Experiences />
@@ -32,9 +32,9 @@ function Home() {
           </div>
         </PDFExport>
       )}
-      <div>
+      <div className="flex justify-center m-10 pb-5">
         <Button primary={true} 
-        className="flex justify-center bg-primary text-white"
+        className=" bg-primary text-white"
         onClick={handleExportWithComponent}>
           Export Portfolio
         </Button>

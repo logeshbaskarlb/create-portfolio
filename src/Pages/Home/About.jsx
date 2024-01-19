@@ -9,15 +9,15 @@ function About() {
   return (
     <div>
       <SectionTitle title="About" />
-      <div className="flex w-full items-center sm:flex-col">
-        <div className="h-[70vh]  w-[200px]  sm:w-full">
+      <div className="mx-20 flex w-full px-10 gap-10 items-center sm:mx-2  sm:flex-col">
+        <div className="h-full  w-[500px]  sm:w-full">
           {/* <dotlottie-player
             src={lottieURL}
             background="transparent"
             speed="1"
             autoplay
           ></dotlottie-player> */}
-          <img src={lottieURL} className="w-[500px] flex justify-center" alt="" />
+          <img src={lottieURL} alt="About Me" />
         </div>
         <div className="flex flex-col gap-5 w-1/2 sm:w-full ">
           <p className="text-white">
@@ -29,7 +29,7 @@ function About() {
         </div>
       </div>
 
-      <div className="py-5">
+      <div className="py-10 mx-20">
         <h1 className="text-tertiary text-xl">
             Here are a few technologies I've been working with recently:
         </h1>
