@@ -34,9 +34,7 @@ i
 {
 cursor: pointer;
 }
-i:hover{
-  color: white;
-}
+
 
 /*Loader animation*/
 .k{
@@ -103,3 +101,14 @@ textarea {
   padding-top: 10px;
 }
 
+
+.kvnkjabvav .showPass{
+  position: relative;
+}
+.kvnkjabvav .showPass .showPassIcon{
+  position:absolute ;
+  bottom: 22px ;
+  right: 8px ;
+  font-size: 1.3em ;
+  cursor: pointer;
+}

@@ -10,7 +10,7 @@ function AdminExperiences() {
   const { experience } = portfolioData;
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [selectedItemForEdit, setSelectedItemForEdit] = useState(null);
-  const [type , setType] = useState("add")
+  const [type, setType] = useState("add");
 
   const onFinish = async (values) => {
     try {
@@ -43,20 +43,20 @@ function AdminExperiences() {
 
   const onDelete = async (item) => {
     try {
-        dispatch(Showloading());
-        const response = await axios.post("/api/portfolio/delete-experience",{
-            _id: item._id,
-        });
-        dispatch(HideLoading());
-        if(response.data.success){
-            message.success(response.data.message);
-            dispatch(ReloadData(true));
-        }else{
-            message.error(response.data.message)
-        }
+      dispatch(Showloading());
+      const response = await axios.post("/api/portfolio/delete-experience", {
+        _id: item._id,
+      });
+      dispatch(HideLoading());
+      if (response.data.success) {
+        message.success(response.data.message);
+        dispatch(ReloadData(true));
+      } else {
+        message.error(response.data.message);
+      }
     } catch (error) {
-        dispatch(HideLoading());
-        message.error(error.message);
+      dispatch(HideLoading());
+      message.error(error.message);
     }
   };
   return (
@@ -80,9 +80,12 @@ function AdminExperiences() {
             <h1>Role : {experiences.title}</h1>
             <h1>{experiences.description}</h1>
             <div className="flex justify-end gap-5 mt-5">
-              <button className="bg-red-500 text-white px-5 py-2"
-              onClick={()=>{
-                onDelete(experiences)}}>
+              <button
+                className="bg-red-500 text-white px-5 py-2"
+                onClick={() => {
+                  onDelete(experiences);
+                }}
+              >
                 Delete
               </button>
               <button
@@ -90,7 +93,7 @@ function AdminExperiences() {
                 onClick={() => {
                   setSelectedItemForEdit(experiences);
                   setShowAddEditModal(true);
-                  setType("edit")
+                  setType("edit");
                 }}
               >
                 Edit
@@ -100,48 +103,49 @@ function AdminExperiences() {
         ))}
       </div>
 
-    {
-        ( type === "add" || selectedItemForEdit) &&
+      {(type === "add" || selectedItemForEdit) && (
         <Modal
-        open={showAddEditModal}
-        title={selectedItemForEdit ? "Edit Experience " : "Add Experience "}
-        footer={null}
-        onCancel={() =>{ 
-            setShowAddEditModal(false)
-            setSelectedItemForEdit(null)
-        }}
-      >
-        <Form layout="vertical" onFinish={onFinish}
-        initialValues={ selectedItemForEdit || {} } >
-        
-          <Form.Item label="Period" name="period">
-            <input placeholder="Period" />
-          </Form.Item>
-          <Form.Item label="Company" name="company">
-            <input placeholder="Company" />
-          </Form.Item>
-          <Form.Item label="Title" name="title">
-            <input placeholder="Title" />
-          </Form.Item>
-          <Form.Item label="Description" name="description">
-            <input placeholder="Description" />
-          </Form.Item>
-          <div className="flex justify-end">
-            <button
-              className="border-primary text-primary px-5 py-2"
-              onClick={() => {
-                setShowAddEditModal(false);
-              }}
-            >
-              Cancel
-            </button>
-            <button className="bg-primary text-white px-5 py-2">
-              {selectedItemForEdit ? "Update" : "Add"}
-            </button>
-          </div>
-        </Form>
-      </Modal>
-    }
+          open={showAddEditModal}
+          title={selectedItemForEdit ? "Edit Experience " : "Add Experience "}
+          footer={null}
+          onCancel={() => {
+            setShowAddEditModal(false);
+            setSelectedItemForEdit(null);
+          }}
+        >
+          <Form
+            layout="vertical"
+            onFinish={onFinish}
+            initialValues={selectedItemForEdit || {}}
+          >
+            <Form.Item label="Period" name="period">
+              <input placeholder="Period" />
+            </Form.Item>
+            <Form.Item label="Company" name="company">
+              <input placeholder="Company" />
+            </Form.Item>
+            <Form.Item label="" name="title">
+              <input placeholder="Title" />
+            </Form.Item>
+            <Form.Item label="Description" name="description">
+              <input placeholder="Description" />
+            </Form.Item>
+            <div className="flex justify-end">
+              <button
+                className="border-primary text-primary px-5 py-2"
+                onClick={() => {
+                  setShowAddEditModal(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button className="bg-primary text-white px-5 py-2">
+                {selectedItemForEdit ? "Update" : "Add"}
+              </button>
+            </div>
+          </Form>
+        </Modal>
+      )}
     </div>
   );
 }

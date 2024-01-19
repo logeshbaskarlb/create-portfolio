@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import About from "./About";
 
 function Home() {
+  
   const { portfolioData} = useSelector((state)=>state.root)
 
   return (

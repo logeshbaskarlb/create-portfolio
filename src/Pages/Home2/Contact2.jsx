@@ -1,5 +1,5 @@
 import React from 'react'
-import SectionTitle from '../../Components/SectionTitle'
+import SectionTile2 from '../../Components/SectionTile2'
 import { useSelector } from 'react-redux';
 
 function Contact2() {
@@ -8,7 +8,7 @@ function Contact2() {
     
   return (
     <div>
-        <SectionTitle title="Say Hello !" />
+        <SectionTile2 title="Say Hello !" />
         <div className="flex sm:flex-col items-center justify-between">
         <div className="flex flex-col ">
           <p className="text-fifth">{"{"}</p>

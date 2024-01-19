@@ -1,5 +1,5 @@
 import React from "react";
-import SectionTitle from "../../Components/SectionTitle";
+import SectionTile2 from "../../Components/SectionTile2";
 import { useSelector } from "react-redux";
 
 function About2() {
@@ -10,11 +10,15 @@ function About2() {
 
   return (
     <div>
-      <SectionTitle title="About" />
+      <SectionTile2 title="About" />
       <div className="flex  w-full items-center sm:flex-col">
       <div className="flex flex-col gap-5 w-1/2 sm:w-full ">
-          <p className="text-fifth ">{description1 || ""}</p>
-          <p className="text-fifth ">{description2 || ""}</p>
+          <p className="text-fifth ">
+            {description1 || ""}
+          </p>
+          <p className="text-fifth ">
+            {description2 || ""}
+          </p>
         </div>
         <div className="h-[70vh] w-1/2 sm:w-full">
           <dotlottie-player

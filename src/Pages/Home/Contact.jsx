@@ -23,9 +23,8 @@ function Contact() {
 
         <div className="h-[400px] ">
           <dotlottie-player
-            src="https://lottie.host/f46a0750-6733-456e-a774-79b94e6f48d0/Yb6jSPvMRy.json"
+            src="https://lottie.host/c54ada9d-77af-48e9-9a5d-9c8d5ed82ce6/0mbYvzMQRi.json"
             background="transparent"
-            speed="1"
             autoplay
           ></dotlottie-player>
         </div>

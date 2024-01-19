@@ -12,7 +12,7 @@ function About() {
       <div className="flex w-full items-center sm:flex-col">
         <div className="h-[70vh] w-1/2 sm:w-full">
           <dotlottie-player
-            src="https://lottie.host/4cd315a8-7321-4684-8941-f5661bd17891/PbKhCG39LH.json"
+            src="https://lottie.host/8650e937-2910-42c5-9520-242fff84bb83/R5EzfeH3WZ.json"
             background="transparent"
             speed="1"
             autoplay

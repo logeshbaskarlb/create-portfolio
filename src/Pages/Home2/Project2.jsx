@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SectionTitle from '../../Components/SectionTitle';
+import SectionTile2 from '../../Components/SectionTile2';
 import { useSelector } from 'react-redux';
 
 function Project2() {
@@ -10,7 +10,7 @@ function Project2() {
 
   return (
     <div>
-          <SectionTitle title="Projects" />
+          <SectionTile2 title="Projects" />
 
 <div className="flex py-10 gap-20 sm:flex-col">
   <div

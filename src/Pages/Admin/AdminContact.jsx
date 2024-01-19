@@ -3,11 +3,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 
 function AdminContact() {
 
+  const location = useLocation();
+  const { state } =location;
   const dispatch = useDispatch();
-  const { portfolioData } = useSelector((state) => state.root);
+  const { portfolioData , selectedHome } = useSelector((state) => state.root);
+  console.log(selectedHome);
+
   
   const onFinish = async (values) => {
    try {
@@ -28,14 +33,18 @@ function AdminContact() {
     message.error(error.message)
    }
   };
+
+ 
+
   return (
+    <>
     <div>
+     
       <Form
         onFinish={onFinish}
         layout="vertical"
         initialValues={portfolioData?.contact}
       >
-       
         <Form.Item name="name" label="Name">
           <input placeholder="Name" />
         </Form.Item>
@@ -56,13 +65,24 @@ function AdminContact() {
       
         <Form.Item name="address" label="Address">
           <input placeholder="Address" />
-        </Form.Item>
-        
+        </Form.Item>        
+         
+        <div className="absolute" >
+          <Link className="px-10 py-2 bg-primary text-white" 
+          to={"/pdf"}
+          type="submit">
+            Export to PDF
+          </Link>
+        </div>
+      
+      
         <div className="flex justify-end w-full" >
           <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>
         </div>
       </Form>
     </div>
+    </>
+
   );
 }
 

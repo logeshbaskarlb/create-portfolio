@@ -5,8 +5,9 @@ const rootSlice = createSlice({
   initialState: {
     loading: false,
     portfolioData: null,
-    reloadData : false,
-    showPassword : false
+    reloadData: false,
+    showPassword: false,
+    selectedHome : null,
   },
   reducers: {
     Showloading: (state, action) => {
@@ -18,14 +19,26 @@ const rootSlice = createSlice({
     SetPortfolioData: (state, action) => {
       state.portfolioData = action.payload;
     },
-    ReloadData : (state,action) =>{
+    ReloadData: (state, action) => {
       state.reloadData = action.payload;
     },
-    setShowPassword : (state , action ) => {
+    setShowPassword: (state, action) => {
       state.showPassword = action.payload;
-    }
+    },
+    setSelectedHome: (state, action) => {
+      state.selectedHome = action.payload;
+    },
+   
   },
 });
 
 export default rootSlice.reducer;
-export const { Showloading, HideLoading, SetPortfolioData , ReloadData , setShowPassword } = rootSlice.actions;
+export const {
+  Showloading,
+  HideLoading,
+  SetPortfolioData,
+  ReloadData,
+  setShowPassword,
+  showLoading,
+  setSelectedHome
+} = rootSlice.actions;
