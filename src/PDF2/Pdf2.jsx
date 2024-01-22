@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,10 +9,12 @@ function Pdf2() {
 
   const selectedHome = useSelector((state)=> state.root.selectedHome);
   const dispatch  = useDispatch();
+  const navigate = useNavigate()
   
-  const handleSelectHome = (homeKey) =>{
+  const handleSelectHome = (homeKey,link) =>{
     console.log(homeKey)
     dispatch (setSelectedHome(homeKey))
+    navigate(link)
   }
   console.log(selectedHome)
   const items = [

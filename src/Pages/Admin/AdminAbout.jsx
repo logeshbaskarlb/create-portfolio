@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
+import { config } from "../../config/Config";
 
 function AdminAbout() {
 
@@ -16,7 +17,8 @@ function AdminAbout() {
     const tempSkills = values.skills.split(",")
     values.skills = tempSkills
     dispatch(Showloading())
-    const response = await axios.post("/api/portfolio/update-about",
+    const response = await axios.post(
+    `${config.userApi}/api/portfolio/update-about`,
     {
       ...values,
       _id : portfolioData.about._id,
@@ -24,9 +26,13 @@ function AdminAbout() {
     dispatch(HideLoading())
     if(response.data.success){
       
-      message.success(response.data.message)
+      message.success(response.data.message, {
+        position: "top-center",
+      })
     }else{
-      message.error(response.data.message)
+      message.error(response.data.message, {
+        position: "top-center",
+      })
     }
    } catch (error) {
     dispatch(HideLoading())

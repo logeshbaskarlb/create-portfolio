@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "../Config/Config";
+import { config } from "../../config/Config";
 
 
 export const login = async (values) => {

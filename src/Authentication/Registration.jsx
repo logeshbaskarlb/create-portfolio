@@ -3,30 +3,27 @@ import React from "react";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Showloading,setShowPassword } from "../redux/rootSlice";
+import { Showloading, setShowPassword } from "../redux/rootSlice";
 import axios from "axios";
-import { config } from "../config/Config"
+import { config } from "../config/Config";
 import { toast } from "react-toastify";
-import LoadingPage from "../Loading/LoadingPage"
+import LoadingPage from "../Loading/LoadingPage";
 
 function Registration() {
   const { showPassword, loading } = useSelector((state) => state.root);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
-      firtName: "",
-      lastName: "",
+      name:"",
       email: "",
       password: "",
     },
     validate: (values) => {
       let errors = {};
-      if (!values.firtName) {
-        errors.firtName = "FirstName is required.";
-      }
-      if (!values.lastName) {
-        errors.lastName = "FirstName is required.";
+      if (!values.name) {
+        errors.name = "Name is required.";
       }
       if (!values.email) {
         errors.email = "Email is required";
@@ -45,6 +42,7 @@ function Registration() {
         dispatch(Showloading(true));
         const response = await axios.post(
         `${config.userApi}/register`, values);
+        console.log(response);
         if (response.status === 201) {
           toast.success(response.data.message, {
             position: "top-center",
@@ -67,69 +65,83 @@ function Registration() {
   });
   return (
     <>
-        <div className="container d-flex justify-content-center align-items-center vh-100 kvnkjabvav">
-        <div className="col-md-6 p-4 border rounded shadow">
-          <h2 className="text-center">Sing up </h2>
-          <div className="d-flex flex-column">
-            <p className="text-center text-black my-2">Create a new acccount</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 kvnkjabvav">
+        <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
+          <h2 className="text-center text-2xl font-bold">Sign up</h2>
+          <div className="flex flex-col">
+            <p className="text-center text-black my-2">Create a new account</p>
           </div>
-          <form action="" className="user" 
-           onSubmit={formik.handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="exampleInputName" className="form-label">
-                Name :
+
+          <form className="user" onSubmit={formik.handleSubmit}>
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Name:
               </label>
               <input
-                type="name"
+                type="text"
                 name="name"
-                className={`form-control form-control-user ${
-                  formik.touched.name && formik.errors.name ? "is-invalid" : ""
+                id="name"
+                autoComplete="family-name"
+                className={`mt-1 p-2 w-full border ${
+                  formik.touched.name && formik.errors.name
+                    ? "border-red-500"
+                    : ""
                 }`}
                 placeholder="Name"
-                onChange={formik.handleChange}
                 value={formik.values.name}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
+              {formik.touched.name && formik.errors.name && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.name}
+                </p>
+              )}
             </div>
-            {formik.touched.name && formik.errors.name && (
-              <span className="d-block ms-3 text-danger small invalid-feedback">
-                {formik.errors.name}
-              </span>
-            )}
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label ">
-                Email address :{" "}
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Email address:
               </label>
               <input
                 type="email"
                 name="email"
-                className={`form-control form-control-user ${
+                id="email"
+                autoComplete="email"
+                className={`mt-1 p-2 w-full border ${
                   formik.touched.email && formik.errors.email
-                    ? "is-invalid"
+                    ? "border-red-500"
                     : ""
                 }`}
-                placeholder="Emai ✉️"
-                onChange={formik.handleChange}
+                placeholder="Email ✉️"
                 value={formik.values.email}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
+              {formik.touched.email && formik.errors.email && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.email}
+                </p>
+              )}
             </div>
-            {formik.touched.email && formik.errors.email && (
-              <span className="d-block ms-3 text-danger small invalid-feedback">
-                {formik.errors.email}
-              </span>
-            )}
-            {/*  */}
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Password :
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Password:
               </label>
               <input
                 name="password"
                 type={showPassword ? "text" : "password"}
-                className={`form-control form-control-user ${
+                className={`mt-1 p-2 w-full border ${
                   formik.touched.password && formik.errors.password
-                    ? "is-invalid"
+                    ? "border-red-500"
                     : ""
                 }`}
                 placeholder="Password 🔑"
@@ -137,56 +149,51 @@ function Registration() {
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
               />
-            </div>
-            <div>
-              <div className="showPass">
+              <div className="showPass mt-2">
                 {showPassword ? (
                   <EyeSlashFill
-                    className="showPassIcon"
+                    className="showPassIcon cursor-pointer"
                     onClick={() => {
                       dispatch(setShowPassword(!showPassword));
                     }}
                   />
                 ) : (
                   <EyeFill
-                    className="showPassIcon"
+                    className="showPassIcon cursor-pointer"
                     onClick={() => {
                       dispatch(setShowPassword(!showPassword));
                     }}
                   />
                 )}
               </div>
+              {formik.touched.password && formik.errors.password && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.password}
+                </p>
+              )}
             </div>
-            {formik.touched.password && formik.errors.password && (
-              <span className="d-block ms-3 text-danger small invalid-feedback">
-                {formik.errors.password}
-              </span>
-            )}
-            <div className="text-center d-flex justify-content-center">
-            <button
-              className="btn btn-dark btn-user btn-block d-flex justify-content-center"
-              type="submit"
-            >
-              {loading ? <LoadingPage /> : " Register Account"}
-            </button> 
+            <div className="text-center">
+              <button
+                type="submit"
+                className="w-full px-4 py-2 text-white bg-black rounded-md"
+              >
+                { loading ? <LoadingPage /> : "Register Account"}
+              </button>
             </div>
           </form>
-          <div className="text-center mt-3 hover">
-            <Link
-              className="text-decoration-none text-dark"
-              to={"/forgot-password"}
-            >
+          <div className="text-center mt-3">
+            <Link to={"/forget-password"} className="text-gray-600">
               Forgot Password?
             </Link>
           </div>
-          <p className="d-flex justify-content-center mt-2 text-white hover">
-            <Link className="text-decoration-none text-dark" to={"/"}>
+          <p className="flex justify-center mt-2 text-white">
+            <Link to={"/"} className="text-gray-600">
               Already have an account? Login!
             </Link>
           </p>
         </div>
       </div>
-      </>
+    </>
   );
 }
 

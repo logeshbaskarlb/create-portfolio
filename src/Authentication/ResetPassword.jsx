@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 function ResetPassword() {
 
-  const params = useParams();
+  const { token } = useParams();
   const navigate = useNavigate();
   const { showPassword ,loading } = useSelector((state) => state.root);
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function ResetPassword() {
         try {
           dispatch(Showloading(true));
           const response = await axios.post(
-            `${config.userApi}/reset-password/${params.token}`,
+            `${config.userApi}/reset-password/${token}`,
           values
           );
           console.log(response);
@@ -56,111 +56,107 @@ function ResetPassword() {
       },
     });
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100 kvnkjabvav">
-    <div className="col-md-6 p-4 border rounded shadow">
-      <h2 className="text-center">Reset Password </h2>
-      <div className="d-flex flex-column">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 kvnkjabvav">
+    <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
+      <h2 className="text-center text-2xl font-bold">Reset Password</h2>
+      <div className="flex flex-col">
         <p className="text-center text-black my-2">Create a new password</p>
       </div>
-      <form action="" onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {formik.errors.general && (
-          <section className="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             {formik.errors.general.message}
-          </section>
+          </div>
         )}
-         <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-           Password : 
+
+        <div className="mb-3">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+            Password:
           </label>
-        <input
-          name="password"
-          type={showPassword ? "text" : "password"}
-          className={`form-control form-control-user ${
-            formik.touched.password && formik.errors.password
-              ? "is-invalid"
-              : ""
-          }`}
-          placeholder="Password 🔑"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          onBlur={formik.handleBlur}
-        />{" "}
-        </div>
-        <div>
-          <div className="showPass">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            className={`mt-1 p-2 w-full border ${
+              formik.touched.password && formik.errors.password ? "border-red-500" : ""
+            }`}
+            placeholder="Password 🔑"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            onBlur={formik.handleBlur}
+          />
+          <div className="showPass mt-2">
             {showPassword ? (
               <EyeSlashFill
-                className="showPassIcon"
+                className="showPassIcon cursor-pointer"
                 onClick={() => {
                   dispatch(setShowPassword(!showPassword));
                 }}
               />
             ) : (
               <EyeFill
-                className="showPassIcon"
+                className="showPassIcon cursor-pointer"
                 onClick={() => {
                   dispatch(setShowPassword(!showPassword));
                 }}
               />
             )}
           </div>
+          {formik.touched.password && formik.errors.password && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.password}</p>
+          )}
         </div>
-        {formik.touched.password && formik.errors.password && (
-          <span className="d-block ms-3 text-danger small invalid-feedback">
-            {formik.errors.password}
-          </span>
-        )}
-           <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          Confirm password : 
+
+        <div className="mb-3">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-600">
+            Confirm Password:
           </label>
-        <input
-          name="confirmPassword"
-          type={showPassword ? "text" : "password"}
-          className={`form-control form-control-user ${
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-              ? ""
-              : "is-invalid"
-          }`}
-          placeholder="confirmPassword 🔑"
-          onChange={formik.handleChange}
-          value={formik.values.confirmPassword}
-          onBlur={formik.handleBlur}
-        />{" "}
-        </div>
-        <div>
-          <div className="showPass">
+          <input
+            name="confirmPassword"
+            type={showPassword ? "text" : "password"}
+            className={`mt-1 p-2 w-full border ${
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+                ? "border-red-500"
+                : ""
+            }`}
+            placeholder="Confirm Password 🔑"
+            onChange={formik.handleChange}
+            value={formik.values.confirmPassword}
+            onBlur={formik.handleBlur}
+          />
+          <div className="showPass mt-2">
             {showPassword ? (
               <EyeSlashFill
-                className="showPassIcon"
+                className="showPassIcon cursor-pointer"
                 onClick={() => {
                   dispatch(setShowPassword(!showPassword));
                 }}
               />
             ) : (
               <EyeFill
-                className="showPassIcon"
+                className="showPassIcon cursor-pointer"
                 onClick={() => {
                   dispatch(setShowPassword(!showPassword));
                 }}
               />
             )}
           </div>
+          {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.confirmPassword}</p>
+          )}
         </div>
-        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-          <span className="d-block ms-3 text-danger small invalid-feedback">
-            {formik.errors.confirmPassword}
-          </span>
-        )}
-        <div className=" text-center m-3"> 
-        <button className="btn btn-dark btn-user btn-block text-center" type="submit">
-          {loading ? <LoadingPage /> : "Submit"}
-        </button>
+
+        <div className="text-center m-3">
+          <button
+            type="submit"
+            className="w-full px-4 py-2 text-white bg-black rounded-md"
+          >
+            {loading ? <LoadingPage /> : "Submit"}
+          </button>
         </div>
       </form>
 
-      <p className="d-flex justify-content-center p-3 text-white">
-        <Link className="text-decoration-none text-dark" to={"/"}>
+      <p className="flex justify-center p-3 text-white">
+        <Link to={"/"} className="text-decoration-none text-dark">
           Already have an account? Login!
         </Link>
       </p>

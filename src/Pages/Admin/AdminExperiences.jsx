@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ReloadData, Showloading } from "../../redux/rootSlice";
 import axios from "axios";
+import { config } from "../../config/Config";
+
 
 function AdminExperiences() {
   const dispatch = useDispatch();
@@ -17,12 +19,15 @@ function AdminExperiences() {
       dispatch(Showloading());
       let response;
       if (selectedItemForEdit) {
-        response = await axios.post("/api/portfolio/update-experience", {
+        response = await axios.post(
+          `${config.userApi}/api/portfolio/update-experience`,
+           {
           ...values,
           _id: selectedItemForEdit._id,
         });
       } else {
-        response = await axios.post("/api/portfolio/add-experience", values);
+        response = await axios.post(
+          `${config.userApi}/api/portfolio/add-experience`,values);
       }
 
       dispatch(HideLoading());
@@ -44,7 +49,8 @@ function AdminExperiences() {
   const onDelete = async (item) => {
     try {
       dispatch(Showloading());
-      const response = await axios.post("/api/portfolio/delete-experience", {
+      const response = await axios.post(
+        `${config.userApi}/api/portfolio/delete-experience`,{
         _id: item._id,
       });
       dispatch(HideLoading());

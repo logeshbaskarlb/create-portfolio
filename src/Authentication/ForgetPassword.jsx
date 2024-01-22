@@ -51,51 +51,51 @@ function ForgetPassword() {
     },
   });
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-    <div className="col-md-6 p-4 border rounded shadow">
-      <h2 className="mt-3 text-center"> Forgot password </h2>
-     
-      <div className="p-4 w-full h-full">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
+      <h2 className="text-center text-2xl font-bold">Forgot Password</h2>
+      <div className="p-4">
         <p className="text-center text-black my-0">
           Here you can reset your password
         </p>
-
       </div>
-      <form action="" className="user" onSubmit={formik.handleSubmit}>
+      <form className="user" onSubmit={formik.handleSubmit}>
         {formik.errors.general && (
-          <section className="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             {formik.errors.general}
-          </section>
+          </div>
         )}
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address :
-        </label>
-        <input
-          type="email"
-          name="email"
-          className={`form-control form-control-user ${
-            formik.touched.email && formik.errors.email ? "is-invalid" : ""
-          }`}
-          placeholder="Email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.email && formik.errors.email && (
-          <span className="d-block ms-3 text-danger small invalid-feedback">
-            {formik.errors.email}
-          </span>
-        )}
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600">
+            Email address:
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autoComplete="email"
+            className={`mt-1 p-2 w-full border ${
+              formik.touched.email && formik.errors.email ? "border-red-500" : ""
+            }`}
+            placeholder="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.email && formik.errors.email && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
+          )}
+        </div>
         <button
-          className="btn btn-dark btn-user btn-block mx-5 mt-3 text-center"
           type="submit"
+          className="w-full px-4 py-2 text-white bg-black rounded-md"
         >
           {loading ? <LoadingPage /> : "Reset Password"}
         </button>
       </form>
       <hr />
-      <div className="d-flex justify-content-end">
-        <Link to="/" className=" m-2 p-2 text-end text-dark text-decoration-none ">
+      <div className="flex justify-end">
+        <Link to="/" className="m-2 p-2 text-end text-dark text-decoration-none">
           Back To Login
         </Link>
       </div>

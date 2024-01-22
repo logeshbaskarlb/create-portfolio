@@ -1,24 +1,38 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Intro from "./Intro";
 import Experiences from "./Experiences";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import LeftSide from "./LeftSide";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import About from "./About";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "antd";
+import { ToastContainer, toast } from "react-toastify";
 
 function Home() {
-  const { portfolioData } = useSelector((state) => state.root);
-  const pdfExportComponent = useRef(null);
+  const dispatch = useDispatch();
+  const { portfolioData , selectedHome  } = useSelector((state) => state.root);
+  
+  const pdfExportComponent = useRef(false);
+
+
+  useEffect(() => {
+   
+    toast.warning('Refresh the page to get the data , Updated !', {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000, // 3 seconds
+    });
+  }, []);
+
   const handleExportWithComponent = (event) => {
     pdfExportComponent.current.save();
   };
 
   return (
     <div>
+      <ToastContainer />
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
           <div className="bg-primary px-40 sm:px-8 sm:py-5">

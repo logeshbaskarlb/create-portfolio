@@ -1,9 +1,11 @@
 import { Form, message } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
 import {  Link, useLocation, useNavigate } from "react-router-dom";
+import { config } from "../../config/Config";
+import { Formik } from "formik";
 
 
 function AdminContact() {
@@ -15,19 +17,16 @@ function AdminContact() {
   const { portfolioData , selectedHome } = useSelector((state) => state.root);
   console.log(selectedHome);
   const navigate = useNavigate()
+
+  
   const [pdfKey,setPdfKey] = useState(0)
   const [shouldReload, setShouldReload] = useState(false);
-  
-  // if(selectedHome === "home1"){
-  //   navigate(<Home />)
-  // }else {
-  //   navigate(<Home2 />)
-  // }
   const [formSubmitted, setFormSubmitted] = useState(false);
   const onFinish = async (values) => {
    try {
     dispatch(Showloading())
-    const response = await axios.post("/api/portfolio/update-contact",
+    const response = await axios.post(
+      `${config.userApi}/api/portfolio/update-contact`,
     {
       ...values,
       _id : portfolioData.contact._id,
@@ -46,6 +45,17 @@ function AdminContact() {
    }
   };
 
+  useEffect(() => {
+    if (shouldReload) {
+      navigate(`/select-template`, {
+        state: {
+          pdfKey: pdfKey + 1,
+          shouldReload: shouldReload,
+        },
+      });
+    }
+  }, [shouldReload, navigate, pdfKey]);
+
  
 
   return (
@@ -56,7 +66,8 @@ function AdminContact() {
          Don't leave any field.
         </p>
      
-      <Form
+      <form
+      
         onFinish={onFinish}
         layout="vertical"
         initialValues={portfolioData?.contact}
@@ -99,7 +110,7 @@ function AdminContact() {
         <div className="flex justify-end w-full" >
           <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>
         </div>
-      </Form>
+      </form>
     </div>
     </>
 
