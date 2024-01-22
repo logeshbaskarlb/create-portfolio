@@ -26,7 +26,7 @@ function Pdf2() {
     {
       id: 2,
       src: image2,
-      link: "/admin",
+      link: "/home2",
     },
   ];
   return (
@@ -61,7 +61,7 @@ function Pdf2() {
                     className="w-1/2 px-6 py-3 m-4 duration-200  hover:bg-pink  bg-white text-black  rounded-lg"
                     to={link}
                   >
-                    Select
+                    Choose
                   </Link>
                 </div>
               </div>

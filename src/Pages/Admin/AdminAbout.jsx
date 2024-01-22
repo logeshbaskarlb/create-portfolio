@@ -35,32 +35,41 @@ function AdminAbout() {
   };
   return (
     <div>
-      <Form
-        onFinish={onFinish}
-        layout="vertical"
-        initialValues={{...portfolioData.about,
-        skills : portfolioData.about.skills.join(" , ")}}
-      >
-        <Form.Item name="lottieURL" label="URL">
-          <input placeholder="URL" />
-        </Form.Item>
-       
-        <Form.Item name="description1" label="Description1">
-          <input placeholder="Description1" />
-        </Form.Item>
-        <Form.Item name="description2" label="Description2">
-          <textarea placeholder="Description2" />
-        </Form.Item>
+         <p className="flex  justify-end p-0">
+          <span className="text-red-500 ">*Note :</span>
+         Don't leave any field.
+        </p>
 
-        <Form.Item name="skills" label="Skills">
-          <textarea placeholder="Skills" />
-        </Form.Item>
+        <div>
+    
+    <Form
+      onFinish={onFinish}
+      layout="vertical"
+      initialValues={{...portfolioData.about,
+      skills : portfolioData.about.skills.join(" , ")}}
+    >
+      <Form.Item name="lottieURL" label="URL">
+        <input placeholder="URL" />
+      </Form.Item>
+     
+      <Form.Item name="description1" label="Description1">
+        <input placeholder="Description1" />
+      </Form.Item>
+      <Form.Item name="description2" label="Description2">
+        <textarea placeholder="Description2" />
+      </Form.Item>
 
-        <div className="flex justify-end w-full" >
-          <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>
-        </div>
-      </Form>
+      <Form.Item name="skills" label="Skills">
+        <textarea placeholder="Skills" />
+      </Form.Item>
+
+      <div className="flex justify-end w-full" >
+        <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>
+      </div>
+    </Form>
+  </div>
     </div>
+ 
   );
 }
 

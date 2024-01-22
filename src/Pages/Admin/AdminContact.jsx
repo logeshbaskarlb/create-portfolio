@@ -51,6 +51,10 @@ function AdminContact() {
   return (
     <>
     <div>
+    <p className="flex  justify-start p-0">
+          <span className="text-red-500 ">*Note :</span>
+         Don't leave any field.
+        </p>
      
       <Form
         onFinish={onFinish}

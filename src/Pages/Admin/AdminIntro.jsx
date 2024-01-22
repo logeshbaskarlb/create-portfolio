@@ -31,6 +31,10 @@ function AdminIntro() {
   };
   return (
     <div>
+       <p className="flex  justify-end p-0">
+          <span className="text-red-500 ">*Note :</span>
+         Don't leave any field.
+        </p>
       <Form
         onFinish={onFinish}
         layout="vertical"

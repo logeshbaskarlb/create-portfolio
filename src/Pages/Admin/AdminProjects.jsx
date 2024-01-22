@@ -63,6 +63,10 @@ function AdminProjects() {
   };
   return (
     <div>
+        <p className="flex absolute justify-start">
+          <span className="text-red-500 ">*Note :</span>
+         Don't leave any field.
+        </p>
       <div className="flex justify-end">
         <button
           className="bg-primary px-5 py-2 text-white"
