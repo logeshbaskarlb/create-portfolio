@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Showloading, setShowPassword } from "../redux/rootSlice";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Components/Loader";
-import axios from "axios";
-import { config } from "../config/Config";
+import LoadingPage from "../Loading/LoadingPage";
+import { toast } from "react-toastify";
+import { isAuthenticated , login } from "../Components/Protect/AuthService"
+
 
 function Login() {
   const { showPassword, loading } = useSelector((state) => state.root);
@@ -31,137 +32,121 @@ function Login() {
         errors.password = "Password field cannot be empty";
       }
     },
+   
     onSubmit: async (values) => {
-        console.log(values);
-        try {
-          dispatch(Showloading(true));
-          const response = await axios.post(`${config.userApi}/login`,values);
-          if(response.status === 200){
-            localStorage.setItem("token",response.data.token);
-            navigate("/dashboard");
-          }else{
-            alert('Something went wrong');
-          }
-
-        } catch (error) {
-          formik.setErrors({
-            general : error.message
-          })
-        }finally{
-          dispatch(Showloading(false))
-        }
+      try {
+        dispatch(Showloading(true));
+        await login(values);
+        navigate("/dashboard");
+        toast.success('You are login in successfully')
+      } catch (error) {
+        formik.setErrors({ general: error.message });
+        toast.error('Username or password incorrect')
+      } finally {
+        dispatch(Showloading(false));
+      }
     },
   });
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
-      <div className="bg-white p-8 shadow-md rounded-md  w-[415px]">
-        <h2 className="text-2xl flex justify-center font-semibold mb-4">
-          Login
-        </h2>
-        {/* Your login form components go here */}
 
-        <form action="" onSubmit={formik.handleSubmit}>
-          {formik.errors.general && (
-            <section  className=" mx-7 pb-1 mb-3  text-red-600 text-danger text-sm" role="alert">
-              {formik.errors.general.message}
-            </section>
-          )}
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-600 text-sm font-medium mb-2"
-            >
-              Email:
+  React.useEffect(()=>{
+    if(isAuthenticated()){
+      navigate("/dashboard")
+    }
+  },[navigate]);
+
+  return (
+    <div className="container d-flex justify-content-center align-items-center vh-100 kvnkjabvav">
+      <div className="col-md-6 p-4 border rounded shadow">
+        <h2 className="mt-3 text-center"> Welcome </h2>
+        <div className="d-flex flex-column w-full h-full">
+          <p className="text-center text-black my-2">Login to your account</p>
+        </div>
+        <form action="" className="user" onSubmit={formik.handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address :
             </label>
             <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="John@gmail.com"
-              className={`w-full border border-gray-300 rounded-md p-2
-              form-control form-control-user text-black ${
+              className={`form-control form-control-user text-black ${
                 formik.touched.email && formik.errors.email ? "is-valid" : ""
-              }
-              `}
+              }`}
+              type="email"
+              name="email"
+              placeholder="Email"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // Add other input attributes and event handlers as needed
             />
-            {formik.touched.email && formik.errors.email && (
-              <span  className=" mx-7 pb-1 mb-3  text-red-600  text-sm">
-                {formik.errors.email}
-              </span>
-            ) }
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-600 text-sm font-medium mb-2"
-            >
-              Password:
+          {formik.touched.email && formik.errors.email && (
+            <span className="d-block ms-3 text-danger small invalid-feedback">
+              {formik.errors.email}
+            </span>
+          )}
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Password :{" "}
             </label>
             <input
-              type={showPassword ? "text " : "password"}
-              id="password"
-              name="password"
-              placeholder="Ac1$"
-              className={`w-full border border-gray-300 rounded-md p-2
-              form-control form-contol-user ${
+              type={showPassword ? "text" : "password"}
+              className={`form-control form-contol-user ${
                 formik.touched.password && formik.errors.password
                   ? "is-valid"
                   : ""
-              }
-              `}
+              }`}
+              name="password"
+              placeholder="Password 🔑"
               onChange={formik.handleChange}
               value={formik.values.password}
               onBlur={formik.handleBlur}
-              // Add other input attributes and event handlers as needed
             />
           </div>
           <div>
-              <div className="showPass">
-                {showPassword ? (
-                  <EyeSlashFill
-                    className="showPassIcon"
-                    onClick={() => {
-                      dispatch(setShowPassword(!showPassword));
-                    }}
-                  />
-                ) : (
-                  <EyeFill
-                    className="showPassIcon"
-                    onClick={() => {
-                      dispatch(setShowPassword(!showPassword));
-                    }}
-                  />
-                )}
-              </div>
+            <div className="showPass">
+              {showPassword ? (
+                <EyeSlashFill
+                  className="showPassIcon"
+                  onClick={() => {
+                    dispatch(setShowPassword(!showPassword));
+                  }}
+                />
+              ) : (
+                <EyeFill
+                  className="showPassIcon"
+                  onClick={() => {
+                    dispatch(setShowPassword(!showPassword));
+                  }}
+                />
+              )}
             </div>
-          {formik.errors.password ? (
-            <span  className=" mx-7 pb-1 mb-3  text-red-600  text-sm">
+          </div>
+          {formik.touched.password && formik.errors.password && (
+            <span className="d-block ms-3 text-danger small invalid-feedback">
               {formik.errors.password}
             </span>
-          ) : null}
-          <button
-            type="submit"
-            className="w-full bg-primary text-white p-2 rounded-md hover:bg-blue-600"
-          >
-            {loading ? <Loader /> : "Login"}
-          </button>
-          {/* Forgot Password and Register buttons */}
-          <div className="flex justify-between text-sm p-2 mt-3 ">
-            <Link
-              to={"/forget-Password"}
-              className="text-primary p-3  hover:bg-primary hover:text-white hover:rounded"
+          )}
+          <div className="text-center">
+            <button
+              className="btn text-white text-center bg-black btn-user"
+              type="submit"
             >
-              Forgot Password?
-            </Link>
-            <Link to={"/register"} className="text-primary p-3 hover:bg-primary hover:text-white hover:rounded">
-              Register
-            </Link>
+              {loading ? <LoadingPage /> : "Login"}
+            </button>
           </div>
         </form>
+        <div className="text-center mt-3 hover">
+          <Link
+            className="text-decoration-none text-dark "
+            to={"/forgot-password"}
+          >
+            Forgot Password?
+          </Link>
+          <div className="d-flex justify-content-center mt-2 text-white hover">
+            <Link className="text-decoration-none text-dark" to={"/register"}>
+              Create an Account!
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

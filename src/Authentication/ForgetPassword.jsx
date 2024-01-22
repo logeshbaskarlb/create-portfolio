@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Loader from '../Components/Loader';
+import LoadingPage from '../Components/Loader';
 import { Showloading } from '../redux/rootSlice';
 import axios from 'axios';
 import { config } from '../config/Config';
@@ -28,86 +28,76 @@ function ForgetPassword() {
       }
       return errors;
     },
-    onSubmit :async (values) =>{
-      console.log(values);
+    onSubmit: async (values) => {
       try {
-        dispatch(Showloading(true))
-        const response = await axios.post(`${config.userApi}/forget-password`,values);
-        if(response.status === 200){
-          toast.success(response.data.message + "Kindly check the mail");
+        dispatch(Showloading(true));
+        const response = await axios.post(
+          `${config.userApi}/forgot-password`,
+          values
+        );
+        console.log(response);
+        if (response.status === 200) {
+          toast.success(response.data.message + "Kindly check your mail");
           navigate("/");
           formik.resetForm();
         }
       } catch (error) {
         const message = error.response.data.message;
-        formik.setErrors({general : message})
+        console.error("Error during registration:", message);
+        formik.setErrors({ general: message }); // Use setErrors to display the error message
+      } finally {
+        dispatch(Showloading(false));
       }
-    }
-  })
+    },
+  });
   return (
-    <div>
-    <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
-      <div className="bg-white p-8 shadow-md rounded-md w-[415px]">
-        <h2 className="text-2xl flex justify-center font-semibold mb-4">
-        Forgot password 
-        </h2>
-        <div className=" text-red-700 text-sm ">
-            <p className="text-center my-2">
-              Here you can reset your password
-            </p>
-           
-          </div>
-        {/* Your login form components go here */}
-        <form action='' onSubmit={formik.handleSubmit}>
-        {
-            formik.errors.general && (<section className=" mx-7 pb-1 mb-3  text-red-600 text-danger text-sm"
-            role="alert">
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+    <div className="col-md-6 p-4 border rounded shadow">
+      <h2 className="mt-3 text-center"> Forgot password </h2>
+     
+      <div className="p-4 w-full h-full">
+        <p className="text-center text-black my-0">
+          Here you can reset your password
+        </p>
+
+      </div>
+      <form action="" className="user" onSubmit={formik.handleSubmit}>
+        {formik.errors.general && (
+          <section className="alert alert-danger" role="alert">
             {formik.errors.general}
-            </section>
-         )}
-          <div className="mb-0">
-            <label
-              htmlFor="email"
-              className="block text-gray-600 text-sm font-medium mb-2"
-            >
-              Email:
-            </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="John@gmail.com"
-              className="w-full border border-gray-300 rounded-md p-2"
-              onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
-              // Add other input attributes and event handlers as needed
-            />
-          </div>
-          {formik.errors.email ? (
-            <span className=" mx-7 pb-1 mb-3  text-red-600 text-danger text-sm">
-              {formik.errors.email}
-            </span>
-          ) : null}
-         
-       
-          <button
-            type="submit"
-            className="w-full mt-7 bg-primary text-white p-2 rounded-md hover:bg-blue-600"
-          >
-               { loading ? <Loader /> : "Reset Password"}
-          </button>
-          {/* Forgot Password and Register buttons */}
-          <div className="flex justify-end text-sm p-2 mt-3 ">
-           
-            <Link
-              to={"/"}
-              className="text-primary p-3  hover:bg-primary hover:text-white hover:rounded"
-            >
-              Already have an account? Login!
-            </Link>
-          </div>
-        </form>
+          </section>
+        )}
+        <label htmlFor="exampleInputEmail1" className="form-label">
+          Email address :
+        </label>
+        <input
+          type="email"
+          name="email"
+          className={`form-control form-control-user ${
+            formik.touched.email && formik.errors.email ? "is-invalid" : ""
+          }`}
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <span className="d-block ms-3 text-danger small invalid-feedback">
+            {formik.errors.email}
+          </span>
+        )}
+        <button
+          className="btn btn-dark btn-user btn-block mx-5 mt-3 text-center"
+          type="submit"
+        >
+          {loading ? <LoadingPage /> : "Reset Password"}
+        </button>
+      </form>
+      <hr />
+      <div className="d-flex justify-content-end">
+        <Link to="/" className=" m-2 p-2 text-end text-dark text-decoration-none ">
+          Back To Login
+        </Link>
       </div>
     </div>
   </div>

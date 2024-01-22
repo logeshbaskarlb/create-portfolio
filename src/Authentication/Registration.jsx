@@ -7,6 +7,7 @@ import { Showloading,setShowPassword } from "../redux/rootSlice";
 import axios from "axios";
 import { config } from "../config/Config"
 import { toast } from "react-toastify";
+import LoadingPage from "../Loading/LoadingPage"
 
 function Registration() {
   const { showPassword, loading } = useSelector((state) => state.root);
@@ -39,127 +40,102 @@ function Registration() {
       }
       return errors;
     },
-    onSubmit : async (values) =>{
+    onSubmit: async (values) => {
       try {
         dispatch(Showloading(true));
-        const response = await axios.post(`${config.userApi}/register`,values);
-        if(response.status === 201){
-          toast.success(response.data.message,{
-            position:"top-center",
+        const response = await axios.post(
+        `${config.userApi}/register`, values);
+        if (response.status === 201) {
+          toast.success(response.data.message, {
+            position: "top-center",
           });
         }
-        navigate("/")
+        navigate("/");
+        formik.resetForm();
       } catch (error) {
-        console.error(
-          "Error during registration:",//response.data.message
-        )
-        toast.error("Error during registration. Please try again.", {
-          position: "top-center",
-        });
+        console.error("Error during registration:", error.message);
+  toast.error(
+    error.response
+      ? error.response.data.message || "Server error"
+      : "Network error. Please check your connection.",
+    { position: "top-center" }
+  );
+      } finally {
+        dispatch(Showloading(false));
       }
-    }
+    },
   });
   return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
-        <div className="bg-white p-8 shadow-md rounded-md w-[415]">
-          <h2 className="text-2xl flex justify-center font-semibold mb-4">
-            Register
-          </h2>
-          {/* Your login form components go here */}
-          <form>
-            <div className="flex ">
-              <div className="mb-4">
-                <label
-                  htmlFor="FirtName"
-                  className="block text-gray-600 text-sm font-medium mb-2"
-                >
-                  <span className="hover:text-red-600">FirtName:</span>
-                </label>
-                <input
-                  type="text"
-                  id="firtName"
-                  name="firtName"
-                  placeholder="John "
-                  className="w-full border border-gray-300 rounded-md p-2"
-                  onChange={formik.handleChange}
-                  value={formik.values.firtName}
-                  onBlur={formik.handleBlur}
-                  // Add other input attributes and event handlers as needed
-                />
-              </div>
-              {formik.errors.firtName ? (
-                <span className="d-block mx-5 my-2 text-start text-danger small invalid-feedback">
-                  {formik.errors.firtName}
-                </span>
-              ) : null}
-
-              <div className="mb-4 ml-3">
-                <label
-                  htmlFor="LastName"
-                  className="block text-gray-600 text-sm font-medium mb-2"
-                >
-                  <span className="hover:text-red-600">LastName:</span>{" "}
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="John "
-                  className="w-full border border-gray-300 rounded-md p-2"
-                  onChange={formik.handleChange}
-                  value={formik.values.lastName}
-                  onBlur={formik.handleBlur}
-                  // Add other input attributes and event handlers as needed
-                />
-              </div>
-            </div>
-            {formik.errors.lastName ? (
-              <span className="d-block mx-5 my-2 text-start text-danger small invalid-feedback">
-                {formik.errors.lastName}
-              </span>
-            ) : null}
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-gray-600 text-sm font-medium mb-2"
-              >
-                Email:
+    <>
+        <div className="container d-flex justify-content-center align-items-center vh-100 kvnkjabvav">
+        <div className="col-md-6 p-4 border rounded shadow">
+          <h2 className="text-center">Sing up </h2>
+          <div className="d-flex flex-column">
+            <p className="text-center text-black my-2">Create a new acccount</p>
+          </div>
+          <form action="" className="user" 
+           onSubmit={formik.handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="exampleInputName" className="form-label">
+                Name :
               </label>
               <input
-                type="text"
-                id="email"
+                type="name"
+                name="name"
+                className={`form-control form-control-user ${
+                  formik.touched.name && formik.errors.name ? "is-invalid" : ""
+                }`}
+                placeholder="Name"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            {formik.touched.name && formik.errors.name && (
+              <span className="d-block ms-3 text-danger small invalid-feedback">
+                {formik.errors.name}
+              </span>
+            )}
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label ">
+                Email address :{" "}
+              </label>
+              <input
+                type="email"
                 name="email"
-                placeholder="John@gmail.com"
-                className="w-full border border-gray-300 rounded-md p-2"
+                className={`form-control form-control-user ${
+                  formik.touched.email && formik.errors.email
+                    ? "is-invalid"
+                    : ""
+                }`}
+                placeholder="Emai ✉️"
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 onBlur={formik.handleBlur}
-                // Add other input attributes and event handlers as needed
               />
             </div>
-            {formik.errors.email ? (
-              <span className="d-block mx-5 my-2 text-start text-danger small invalid-feedback">
+            {formik.touched.email && formik.errors.email && (
+              <span className="d-block ms-3 text-danger small invalid-feedback">
                 {formik.errors.email}
               </span>
-            ) : null}
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-gray-600 text-sm font-medium mb-2"
-              >
-                Password:
+            )}
+            {/*  */}
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Password :
               </label>
               <input
-                type="password"
-                id="password"
                 name="password"
-                placeholder="Ac1$"
-                className="w-full border border-gray-300 rounded-md p-2"
+                type={showPassword ? "text" : "password"}
+                className={`form-control form-control-user ${
+                  formik.touched.password && formik.errors.password
+                    ? "is-invalid"
+                    : ""
+                }`}
+                placeholder="Password 🔑"
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
-                // Add other input attributes and event handlers as needed
               />
             </div>
             <div>
@@ -181,31 +157,36 @@ function Registration() {
                 )}
               </div>
             </div>
+            {formik.touched.password && formik.errors.password && (
+              <span className="d-block ms-3 text-danger small invalid-feedback">
+                {formik.errors.password}
+              </span>
+            )}
+            <div className="text-center d-flex justify-content-center">
             <button
+              className="btn btn-dark btn-user btn-block d-flex justify-content-center"
               type="submit"
-              className="w-full bg-primary text-white p-2 rounded-md hover:bg-blue-600"
             >
-              Login
-            </button>
-            {/* Forgot Password and Register buttons */}
-            <div className="flex justify-between text-sm p-2 mt-3 ">
-              <Link
-                to={"/forget-Password"}
-                className="text-primary p-3  hover:bg-primary hover:text-white hover:rounded"
-              >
-                Forgot Password?
-              </Link>
-              <Link
-                to={"/"}
-                className="text-primary p-3  hover:bg-primary hover:text-white hover:rounded"
-              >
-                Already have an account? Login!
-              </Link>
+              {loading ? <LoadingPage /> : " Register Account"}
+            </button> 
             </div>
           </form>
+          <div className="text-center mt-3 hover">
+            <Link
+              className="text-decoration-none text-dark"
+              to={"/forgot-password"}
+            >
+              Forgot Password?
+            </Link>
+          </div>
+          <p className="d-flex justify-content-center mt-2 text-white hover">
+            <Link className="text-decoration-none text-dark" to={"/"}>
+              Already have an account? Login!
+            </Link>
+          </p>
         </div>
       </div>
-    </div>
+      </>
   );
 }
 

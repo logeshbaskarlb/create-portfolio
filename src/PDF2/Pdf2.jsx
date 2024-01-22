@@ -1,21 +1,20 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {setSelectedHome} from "../redux/rootSlice"
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
-
+import { useDispatch, useSelector } from "react-redux";
+import {setSelectedHome} from "../redux/rootSlice"
 
 function Pdf2() {
+
   const selectedHome = useSelector((state)=> state.root.selectedHome);
   const dispatch  = useDispatch();
-
+  
   const handleSelectHome = (homeKey) =>{
     console.log(homeKey)
     dispatch (setSelectedHome(homeKey))
   }
   console.log(selectedHome)
-
   const items = [
     {
       id: 1,
@@ -29,6 +28,8 @@ function Pdf2() {
       link: "/home2",
     },
   ];
+  
+  
   return (
     <div className="bg-primary h-[100%] m-0 p-0">
       <div
