@@ -10,12 +10,12 @@ function Projects() {
     <div>
       <SectionTitle title="Projects" />
 
-      <div className="mx-20 flex py-10 gap-20 w-3/4 sm:flex-col">
-        <div className="flex flex-wrap gap-10 sm:flex-col">
+      <div className="mx-20 flex py-10 gap-20 w-3/4 md:flex-col">
+        <div className="flex flex-wrap gap-10 md:flex-col">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-800 p-4 gap-2 rounded-sm w-full sm:w-full  flex justify-center sm:flex sm:flex-col"
+              className="bg-gray-800 p-4 gap-2 rounded-sm w-full md:w-full  flex justify-center md:flex md:flex-col"
             >
               <img
                 src={project.image}
@@ -23,7 +23,7 @@ function Projects() {
                 className="m-5 "
                 alt="Project PNG"
               />
-              <div className="flex flex-col sm:flex sm:flex-col">
+              <div className="flex flex-col md:flex md:flex-col">
                 <h1 className="text-2xl text-white mb-4">
                   <span className="text-secondary">Title : </span>
                   {"  "}

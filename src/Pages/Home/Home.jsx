@@ -37,7 +37,7 @@ function Home() {
       <ToastContainer />
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
-          <div className="bg-primary px-40 sm:px-8 sm:py-5">
+          <div className="bg-primary px-40 md:px-8 md:py-5">
             <Intro />
             <About />
             <Experiences />

@@ -9,7 +9,7 @@ function Contact2() {
   return (
     <div>
       <SectionTile2 title="Say Hello !" />
-      <div className="flex sm:flex-col items-center justify-between">
+      <div className="flex md:flex-col items-center justify-between">
         <div className="flex flex-col ">
           <p className="text-fifth">{"{"}</p>
           {Object.keys(contact).map(

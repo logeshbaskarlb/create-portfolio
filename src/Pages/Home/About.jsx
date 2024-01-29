@@ -10,8 +10,8 @@ function About() {
   return (
     <div>
       <SectionTitle title="About" />
-      <div className="mx-20 px-10 gap-10 flex w-full  items-center sm:mx-2  sm:flex-col">
-        <div className="h-full  w-[500px]  sm:w-full">
+      <div className="mx-20 px-10 gap-10 flex w-full  items-center md:mx-2  md:flex-col">
+        <div className="h-full  w-[500px]  md:w-full">
           {/* <dotlottie-player
             src={lottieURL}
             background="transparent"
@@ -20,7 +20,7 @@ function About() {
           ></dotlottie-player> */}
           <img src={lottieURL} alt="About Me" />
         </div>
-        <div className="flex flex-col gap-5 w-1/2 sm:w-full ">
+        <div className="flex flex-col gap-5 w-1/2 md:w-full ">
           <p className="text-white">{description1 || ""}</p>
           <p className="text-white">{description2 || ""}</p>
         </div>

@@ -15,10 +15,10 @@ module.exports = {
       }
     },
     screens: {
-      'lg': {'max': '1023px'},
+      'lg': {'max': '1024px'},
     
-      'sm': {'max': '950px'},
-
+      'md': {'max': '1240px'},
+      
     }
   },
   plugins: [],

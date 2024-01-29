@@ -35,7 +35,7 @@ function Home2() {
     <div>
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
-          <div className="bg-fourth  px-40 sm:px-8">
+          <div className="bg-fourth  px-40 md:px-8 md:py-5">
             <Intro2 />
             <About2 />
             <Experience2 />
