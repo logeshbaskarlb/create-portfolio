@@ -5,28 +5,26 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import LeftSide from "./LeftSide";
-import { useDispatch, useSelector } from "react-redux";
 import About from "./About";
+import {  useSelector } from "react-redux";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 
 function Home() {
-  const dispatch = useDispatch();
-  const { portfolioData , selectedHome  } = useSelector((state) => state.root);
+  const { portfolioData   } = useSelector((state) => state.root);
   
-  const pdfExportComponent = useRef(false);
+  const pdfExportComponent = useRef(null);
 
 
   useEffect(() => {
-   
     toast.warning('Refresh the page to get the data , Updated !', {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 3000, // 3 seconds
     });
   }, []);
 
-  const handleExportWithComponent = (event) => {
+  const handleExportWithComponent = () => {
     pdfExportComponent.current.save();
   };
 
@@ -45,7 +43,7 @@ function Home() {
             <LeftSide />
           </div>
         </PDFExport>
-      )}
+       )} 
       <div className="flex justify-center m-10 pb-5">
         <Button primary={true} 
         className=" bg-primary text-white"

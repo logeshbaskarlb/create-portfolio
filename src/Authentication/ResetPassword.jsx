@@ -4,7 +4,7 @@ import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import LoadingPage from '../Components/Loader';
+import LoadingPage from "../Loading/LoadingPage";
 import axios from 'axios';
 import { config } from '../config/Config';
 import { toast } from 'react-toastify';
@@ -46,7 +46,6 @@ function ResetPassword() {
           console.log(response);
           navigate("/");
           toast.success("Your password was successfully changed");
-          formik.resetForm();
         } catch (error) {
           console.error("Error during password reset:", error);
           formik.setErrors({ general: error });
@@ -56,7 +55,7 @@ function ResetPassword() {
       },
     });
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 kvnkjabvav">
+    <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
     <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
       <h2 className="text-center text-2xl font-bold">Reset Password</h2>
       <div className="flex flex-col">

@@ -3,34 +3,30 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
-import { config } from "../../config/Config";
 
 function AdminAbout() {
 
   const dispatch = useDispatch();
-  
   const { portfolioData } = useSelector((state) => state.root);
-  
-  
+
   const onFinish = async (values) => {
    try {
     const tempSkills = values.skills.split(",")
     values.skills = tempSkills
     dispatch(Showloading())
     const response = await axios.post(
-    `${config.userApi}/api/portfolio/update-about`,
+    "/api/portfolio/update-about",
     {
       ...values,
       _id : portfolioData.about._id,
     })
     dispatch(HideLoading())
     if(response.data.success){
-      
-      message.success(response.data.message, {
+      message.success("About updated successfully", {
         position: "top-center",
       })
     }else{
-      message.error(response.data.message, {
+      message.error("Error", {
         position: "top-center",
       })
     }

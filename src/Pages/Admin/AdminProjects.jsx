@@ -8,7 +8,7 @@ import { config } from "../../config/Config";
 function AdminProjects() {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
-  const { project } = portfolioData;
+  const { projects } = portfolioData;
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [selectedItemForEdit, setSelectedItemForEdit] = useState(null);
   const [type , setType] = useState("add")
@@ -21,7 +21,7 @@ function AdminProjects() {
       let response;
       if (selectedItemForEdit) {
         response = await axios.post(
-          `${config.userApi}/api/portfolio/update-project`, {
+          `/api/portfolio/update-project`, {
           ...values,
           _id: selectedItemForEdit._id,
         });
@@ -80,26 +80,27 @@ function AdminProjects() {
         </button>
       </div>
       <div className="grid grid-cols-4 gap-5 mt-5 sm:grid-cols-1">
-        {project?.map((projects, key) => (
+        {projects?.map((project, key) => (
           <div key={key} className="shadow border p-5 border-gray-400">
             <h1 className="text-primary text-xl font-bold">
-              {projects.title}
+              {project.title}
             </h1>
             <hr />
-            <img src={projects.image} alt="" className="h-60 w-80" />
-            <h1> Title : {projects.title}</h1>
-            <h1>{projects.description}</h1>
-            <h1>{projects.link}</h1>
+            <img src={project.image} alt="" className="h-60 w-80" />
+            <h1> <span className="text-secondary">Title : </span> {project.title}</h1>
+            <h1> <span className="text-secondary">Description :</span>  {project.description}</h1>
+            <h1> <span className="text-secondary">Technologies :</span>  {project.technologies}</h1>
+            <h1> <span className="text-secondary"> Link : </span>{project.link}</h1>
             <div className="flex justify-end gap-5 mt-5">
               <button className="bg-red-500 text-white px-5 py-2"
               onClick={()=>{
-                onDelete(projects)}}>
+                onDelete(project)}}>
                 Delete
               </button>
               <button
                 className="bg-primary text-white px-5 py-2"
                 onClick={() => {
-                  setSelectedItemForEdit(projects);
+                  setSelectedItemForEdit(project);
                   setShowAddEditModal(true);
                   setType("edit")
                 }}

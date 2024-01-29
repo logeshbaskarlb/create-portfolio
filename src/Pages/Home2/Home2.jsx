@@ -13,6 +13,8 @@ import { Button } from "antd";
 function Home2() {
   const { portfolioData } = useSelector((state) => state.root);
   const pdfExportComponent = useRef(null);
+
+  
   const handleExportWithComponent = (event) => {
     pdfExportComponent.current.save();
   };

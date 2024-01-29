@@ -6,10 +6,11 @@ function About() {
   const {  portfolioData } = useSelector((state)=>state.root)
   const { about } = portfolioData;
   const { skills , lottieURL , description1 ,description2 } = about;
+  console.log(portfolioData)
   return (
     <div>
       <SectionTitle title="About" />
-      <div className="mx-20 flex w-full px-10 gap-10 items-center sm:mx-2  sm:flex-col">
+      <div className="mx-20 px-10 gap-10 flex w-full  items-center sm:mx-2  sm:flex-col">
         <div className="h-full  w-[500px]  sm:w-full">
           {/* <dotlottie-player
             src={lottieURL}

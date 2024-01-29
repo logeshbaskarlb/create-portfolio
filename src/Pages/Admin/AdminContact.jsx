@@ -1,62 +1,35 @@
 import { Form, message } from "antd";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
-import {  Link, useLocation, useNavigate } from "react-router-dom";
-import { config } from "../../config/Config";
-import { Formik } from "formik";
+import {  Link} from "react-router-dom";
+
 
 
 function AdminContact() {
 
-
-  const location = useLocation();
-  const { state } =location;
   const dispatch = useDispatch();
-  const { portfolioData , selectedHome } = useSelector((state) => state.root);
-  console.log(selectedHome);
-  const navigate = useNavigate()
-
-  
-  const [pdfKey,setPdfKey] = useState(0)
-  const [shouldReload, setShouldReload] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { portfolioData } = useSelector((state) => state.root);
   const onFinish = async (values) => {
-   try {
-    dispatch(Showloading())
-    const response = await axios.post(
-      `${config.userApi}/api/portfolio/update-contact`,
-    {
-      ...values,
-      _id : portfolioData.contact._id,
-    })
-    dispatch(HideLoading())
-    if(response.data.success){
-      message.success(response.data.message)
-      setShouldReload(true);
-      setFormSubmitted(true);
-      }else{
-      message.error(response.data.message)
+    try {
+      dispatch(Showloading());
+      const response = await axios.post("/api/portfolio/update-contact", {
+        ...values,
+        _id: portfolioData.contact._id,
+      });
+      dispatch(HideLoading());
+      if (response.data.success) {
+        message.success(response.data.message);
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error(error.message);
     }
-   } catch (error) {
-    dispatch(HideLoading())
-    message.error(error.message)
-   }
   };
 
-  useEffect(() => {
-    if (shouldReload) {
-      navigate(`/select-template`, {
-        state: {
-          pdfKey: pdfKey + 1,
-          shouldReload: shouldReload,
-        },
-      });
-    }
-  }, [shouldReload, navigate, pdfKey]);
-
- 
 
   return (
     <>
@@ -66,7 +39,7 @@ function AdminContact() {
          Don't leave any field.
         </p>
      
-      <form
+      <Form
       
         onFinish={onFinish}
         layout="vertical"
@@ -98,9 +71,6 @@ function AdminContact() {
           <Link className="px-10 py-2 bg-primary text-white" 
           to={{
             pathname : "/select-template",
-            state : { 
-            pdfKey : pdfKey + 1 , shouldReload : shouldReload
-            }
           }}
           type="submit">
             Export to PDF
@@ -110,7 +80,7 @@ function AdminContact() {
         <div className="flex justify-end w-full" >
           <button className="px-10 py-2 bg-primary text-white " type="submit">Save</button>
         </div>
-      </form>
+      </Form>
     </div>
     </>
 

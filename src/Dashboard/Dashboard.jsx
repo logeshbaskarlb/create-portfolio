@@ -1,15 +1,16 @@
 import React  from "react";
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {setSelectedHome} from "../redux/rootSlice"
+import { logout } from "../Components/Protect/AuthService";
 function Dashboard() {
 
 
   const selectedHome = useSelector((state)=> state.root.selectedHome);
   const dispatch  = useDispatch();
-
+  const navigate = useNavigate()
   const handleSelectHome = (homeKey) =>{
     console.log(homeKey)
     dispatch (setSelectedHome(homeKey))
@@ -42,6 +43,7 @@ function Dashboard() {
             <p className="text-4xl font-bold inline border-b-4 border-gray-500">
               Welcome to Dashboard
             </p>
+          
             <p className="py-6">You can choose your own templete below</p>
             <p className="py-0">
             Choose the color as your wish and
@@ -81,6 +83,7 @@ function Dashboard() {
           <div className="m-10 p-40 text-7xl text-gray-700 hover:text-white">
             Coming Soon <span>...</span>
           </div>
+          
         </div>
       </div>
     </div>

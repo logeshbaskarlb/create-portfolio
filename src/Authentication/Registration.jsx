@@ -3,9 +3,8 @@ import React from "react";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Showloading, setShowPassword } from "../redux/rootSlice";
+import { HideLoading, Showloading, setShowPassword } from "../redux/rootSlice";
 import axios from "axios";
-import { config } from "../config/Config";
 import { toast } from "react-toastify";
 import LoadingPage from "../Loading/LoadingPage";
 
@@ -16,7 +15,7 @@ function Registration() {
 
   const formik = useFormik({
     initialValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
     },
@@ -41,23 +40,22 @@ function Registration() {
       try {
         dispatch(Showloading(true));
         const response = await axios.post(
-        `${config.userApi}/register`, values);
-        console.log(response);
+         "/register", values);
         if (response.status === 201) {
           toast.success(response.data.message, {
             position: "top-center",
-          });
+          })
         }
-        navigate("/");
-        formik.resetForm();
+        navigate("/");    
+        dispatch(HideLoading())
       } catch (error) {
         console.error("Error during registration:", error.message);
-  toast.error(
-    error.response
-      ? error.response.data.message || "Server error"
-      : "Network error. Please check your connection.",
-    { position: "top-center" }
-  );
+        toast.error(
+          error.response
+            ? error.response.data.message || "Server error"
+            : "Network error. Please check your connection.",
+          { position: "top-center" }
+        );
       } finally {
         dispatch(Showloading(false));
       }
@@ -65,7 +63,7 @@ function Registration() {
   });
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 kvnkjabvav">
+      <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
         <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
           <h2 className="text-center text-2xl font-bold">Sign up</h2>
           <div className="flex flex-col">
@@ -177,7 +175,7 @@ function Registration() {
                 type="submit"
                 className="w-full px-4 py-2 text-white bg-black rounded-md"
               >
-                { loading ? <LoadingPage /> : "Register Account"}
+                {loading ? <LoadingPage /> : "Register Account"}
               </button>
             </div>
           </form>

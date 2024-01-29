@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import LoadingPage from '../Components/Loader';
+import LoadingPage from "../Loading/LoadingPage";
 import { Showloading } from '../redux/rootSlice';
 import axios from 'axios';
 import { config } from '../config/Config';
@@ -51,7 +51,7 @@ function ForgetPassword() {
     },
   });
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-primary">
     <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
       <h2 className="text-center text-2xl font-bold">Forgot Password</h2>
       <div className="p-4">

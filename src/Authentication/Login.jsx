@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Showloading, setShowPassword } from "../redux/rootSlice";
+import {  HideLoading, Showloading, setShowPassword } from "../redux/rootSlice";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingPage from "../Loading/LoadingPage";
@@ -30,6 +30,7 @@ function Login() {
       if (!values.password) {
         errors.password = "Password field cannot be empty";
       }
+      return errors;  
     },
 
     onSubmit: async (values) => {
@@ -37,24 +38,23 @@ function Login() {
         dispatch(Showloading(true));
         await login(values);
         navigate("/dashboard");
-        toast.success("You are login in successfully");
+        toast.success('You are logged in successfully');
       } catch (error) {
         formik.setErrors({ general: error.message });
-        toast.error("Username or password incorrect");
+        toast.error('Username or Password is incorrect');
       } finally {
-        dispatch(Showloading(false));
+        dispatch(HideLoading());
       }
     },
   });
 
-  React.useEffect(() => {
-    if (isAuthenticated()) {
-      navigate("/dashboard");
+  React.useEffect(()=>{
+    if(isAuthenticated()){
+      navigate("/dashboard")
     }
-  }, [navigate]);
-
+  },[navigate]);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 kvnkjabvav">
+    <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
       <div className="max-w-md w-full space-y-8 p-4 bg-white rounded shadow-md">
         <h2 className="mt-3 text-center text-2xl font-bold">Welcome</h2>
         <p className="text-center text-gray-600 my-2">Login to your account</p>
@@ -135,12 +135,12 @@ function Login() {
               type="submit"
               className="w-full px-4 py-2 text-white bg-black rounded-md"
             >
-              {loading ? <LoadingPage /> : "Login"}
+              { loading ? <LoadingPage /> : "Login"}
             </button>
           </div>
         </form>
         <div className="text-center mt-3">
-          <Link to={"/forgot-password"} className="text-gray-600">
+          <Link to={"/forget-password"} className="text-gray-600">
             Forgot Password?
           </Link>
           <div className="mt-2 text-gray-600">

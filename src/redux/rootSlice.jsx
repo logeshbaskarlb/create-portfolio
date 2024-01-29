@@ -32,11 +32,7 @@ const rootSlice = createSlice({
     setNewValue: (state, action) => {
       state.newValue = action.payload;
     },
-    updatePortfolioData: (state, action) => {
-      // Assuming action.payload is the new data
-      state.portfolioData = action.payload;
-    },
-   
+  
   },
 });
 
@@ -50,6 +46,5 @@ export const {
   showLoading,
   setSelectedHome,
   setNewValue,
-  updatePortfolioData
   
 } = rootSlice.actions;

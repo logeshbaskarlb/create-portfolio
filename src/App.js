@@ -1,9 +1,7 @@
-import "./App.css";
 import '@progress/kendo-theme-material/dist/all.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import { useEffect } from "react";
-import Loader from "./Components/Loader";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ReloadData, SetPortfolioData, Showloading } from "./redux/rootSlice";
@@ -17,26 +15,31 @@ import Registration from "./Authentication/Registration"
 import ForgetPassword from "./Authentication/ForgetPassword"
 import ResetPassword from "./Authentication/ResetPassword"
 import Pdf2 from "./PDF2/Pdf2";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
   
-  const dispatach = useDispatch();
-  const { loading, portfolioData , reloadData } = useSelector((state) => state.root);
+  const dispatch  = useDispatch();
+  const {  portfolioData , reloadData } = useSelector((state) => state.root);
+
 
   const getPortfolioData = async () => {
     try {
-      dispatach(Showloading(true));
-      const respose = await axios.get("/api/portfolio/get-portfolio-data");
-      dispatach(SetPortfolioData(respose.data));
-      dispatach(ReloadData(false))
-      dispatach(HideLoading());
+      dispatch(Showloading(true));
+      dispatch(HideLoading());
+      const response = await axios.get("/api/portfolio/get-portfolio-data");
+      dispatch(SetPortfolioData(response.data));
+      dispatch(ReloadData(false));
     } catch (error) {
-      dispatach(HideLoading);
+      dispatch(HideLoading());
     }
   };
+  
+  
 
   useEffect(() => {
+    console.log(portfolioData)
     if (!portfolioData) {
       getPortfolioData();
     }
@@ -48,12 +51,10 @@ function App() {
     }
   },[reloadData])
 
-  
-
   return (
     <>
      <BrowserRouter>
-        {loading ? <Loader /> : null}
+      
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Registration />} />
@@ -68,7 +69,7 @@ function App() {
           <Route path="/select-template" element={<Pdf2 />} />
         </Routes>
       </BrowserRouter>
-    
+    <ToastContainer />
     </>
   );
 }
