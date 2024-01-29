@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
-
+import { config } from "../../config/Config";
 function AdminAbout() {
 
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function AdminAbout() {
     values.skills = tempSkills
     dispatch(Showloading())
     const response = await axios.post(
-    "/api/portfolio/update-about",
+      `${config.userApi}/api/portfolio/update-about`,
     {
       ...values,
       _id : portfolioData.about._id,

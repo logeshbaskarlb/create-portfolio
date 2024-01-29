@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Showloading , HideLoading } from "../../redux/rootSlice"
 import axios from "axios";
 import {  Link} from "react-router-dom";
+import { config } from "../../config/Config";
 
 
 
@@ -14,7 +15,8 @@ function AdminContact() {
   const onFinish = async (values) => {
     try {
       dispatch(Showloading());
-      const response = await axios.post("/api/portfolio/update-contact", {
+      const response = await axios.post(
+        `${config.userApi}/api/portfolio/update-contact`, {
         ...values,
         _id: portfolioData.contact._id,
       });
