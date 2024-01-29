@@ -10,6 +10,7 @@ import {  useSelector } from "react-redux";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { portfolioData   } = useSelector((state) => state.root);
@@ -23,7 +24,11 @@ function Home() {
       autoClose: 3000, // 3 seconds
     });
   }, []);
-
+  const navigate = useNavigate()
+  const EditButton = ()=>{
+    navigate('/admin')
+  }
+  
   const handleExportWithComponent = () => {
     pdfExportComponent.current.save();
   };
@@ -50,6 +55,11 @@ function Home() {
         onClick={handleExportWithComponent}>
           Export Portfolio
         </Button>
+        <Button 
+        className=" bg-primary text-white"
+        onClick={EditButton}>
+        Edit
+      </Button>
       </div>
     </div>
   );

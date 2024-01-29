@@ -3,7 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingPage from "../Loading/LoadingPage";
-import { Showloading } from '../redux/rootSlice';
+import { HideLoading, setLoading } from '../redux/rootSlice';
 import axios from 'axios';
 import { config } from '../config/Config';
 import { toast } from 'react-toastify';
@@ -30,7 +30,7 @@ function ForgetPassword() {
     },
     onSubmit: async (values) => {
       try {
-        dispatch(Showloading(true));
+        dispatch(setLoading(true));
         const response = await axios.post(
           `${config.userApi}/forgot-password`,
           values
@@ -41,12 +41,13 @@ function ForgetPassword() {
           navigate("/");
           formik.resetForm();
         }
+        dispatch(HideLoading())
       } catch (error) {
         const message = error.response.data.message;
         console.error("Error during registration:", message);
         formik.setErrors({ general: message }); // Use setErrors to display the error message
       } finally {
-        dispatch(Showloading(false));
+        dispatch(setLoading(false));
       }
     },
   });

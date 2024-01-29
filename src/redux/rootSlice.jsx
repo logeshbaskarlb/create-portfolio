@@ -14,6 +14,9 @@ const rootSlice = createSlice({
     Showloading: (state, action) => {
       state.loading = true;
     },
+    setLoading:(state,action)=>{
+      state.loading = action.payload
+    },
     HideLoading: (state, action) => {
       state.loading = false;
     },
@@ -46,5 +49,6 @@ export const {
   showLoading,
   setSelectedHome,
   setNewValue,
+  setLoading
   
 } = rootSlice.actions;

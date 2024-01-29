@@ -3,7 +3,7 @@ import React from "react";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { HideLoading, Showloading, setShowPassword } from "../redux/rootSlice";
+import {  setLoading, setShowPassword } from "../redux/rootSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import LoadingPage from "../Loading/LoadingPage";
@@ -38,7 +38,7 @@ function Registration() {
     },
     onSubmit: async (values) => {
       try {
-        dispatch(Showloading(true));
+        dispatch(setLoading(true));
         const response = await axios.post(
          "/register", values);
         if (response.status === 201) {
@@ -46,8 +46,7 @@ function Registration() {
             position: "top-center",
           })
         }
-        dispatch(HideLoading())
-        navigate("/");    
+        navigate("/");
       } catch (error) {
         console.error("Error during registration:", error.message);
         toast.error(
@@ -57,7 +56,7 @@ function Registration() {
           { position: "top-center" }
         );
       } finally {
-        dispatch(Showloading(false));
+        dispatch(setLoading(false));
       }
     },
   });

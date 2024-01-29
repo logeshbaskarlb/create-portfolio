@@ -1,5 +1,5 @@
 import React from 'react'
-import { Showloading, setShowPassword } from '../redux/rootSlice';
+import { setLoading, setShowPassword } from '../redux/rootSlice';
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,7 +38,7 @@ function ResetPassword() {
       onSubmit: async (values) => {
         // Submit logic
         try {
-          dispatch(Showloading(true));
+          dispatch(setLoading(true));
           const response = await axios.post(
             `${config.userApi}/reset-password/${token}`,
           values
@@ -50,7 +50,7 @@ function ResetPassword() {
           console.error("Error during password reset:", error);
           formik.setErrors({ general: error });
         } finally {
-          dispatch(Showloading(false));
+          dispatch(setLoading(false));
         }
       },
     });
