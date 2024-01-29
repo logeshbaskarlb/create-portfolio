@@ -3,26 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
 import { useDispatch, useSelector } from "react-redux";
-import {setSelectedHome} from "../redux/rootSlice"
+import { setSelectedHome } from "../redux/rootSlice";
 
 function Pdf2() {
+  const selectedHome = useSelector((state) => state.root.selectedHome);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const selectedHome = useSelector((state)=> state.root.selectedHome);
-  const dispatch  = useDispatch();
-  const navigate = useNavigate()
-  
-  const handleSelectHome = (homeKey,link) =>{
-    console.log(homeKey)
-    dispatch (setSelectedHome(homeKey))
-    navigate(link)
-  }
-  console.log(selectedHome)
+  const handleSelectHome = (homeKey, link) => {
+    console.log(homeKey);
+    dispatch(setSelectedHome(homeKey));
+    navigate(link);
+  };
+  console.log(selectedHome);
   const items = [
     {
       id: 1,
       src: image,
       link: "/home",
-     
     },
     {
       id: 2,
@@ -30,21 +28,21 @@ function Pdf2() {
       link: "/home2",
     },
   ];
-  
-  
+
   return (
     <div className="bg-primary h-[100%] m-0 p-0">
       <div
         name=""
-        className="bg-gradient-to-b from-black to-gray-800 w-full text-white md:h-screen text-center md:text-left"
+        className="bg-gradient-to-b from-black to-gray-800 w-full text-white sm:h-screen text-center sm:text-left"
       >
         <div className=" p-4  flex flex-col justify-evenly ">
           <div className="pb-8">
             <p className="text-4xl font-bold py-5 border-b-4 border-gray-500">
-            If you want to change the Template or else select the same template
+              If you want to change the Template or else select the same
+              template
             </p>
             <p className="py-6">
-            <span className="text-sixth">Get your Portfolio</span>
+              <span className="text-sixth">Get your Portfolio</span>
             </p>
           </div>
 
@@ -52,12 +50,12 @@ function Pdf2() {
             {items.map(({ id, src, link }) => (
               <div
                 key={id}
-                className="shadow-md shadow-gray-600 rounded-lg overflow-hidden"
+                className="shadow-sm shadow-gray-600 rounded-lg overflow-hidden"
               >
                 <img
                   src={src}
                   alt=""
-                  className="rounded-md duration-200 hover:scale-105"
+                  className="rounded-sm duration-200 hover:scale-105"
                 />
                 <div className="flex items-center justify-center">
                   <Link

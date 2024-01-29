@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function PageNotFound() {
-  return ( 
+  return (
     <div className="bg-primary text-white pt-6">
-    <div>
-    <h1 className="text-3xl flex justify-center pt-5">Page Not Found</h1>
-      <p className="flex justify-center">
-        Sorry, the page you are looking for could not be found.
-      </p>
-    </div>
+      <div>
+        <h1 className="text-3xl flex justify-center pt-5">Page Not Found</h1>
+        <p className="flex justify-center">
+          Sorry, the page you are looking for could not be found.
+        </p>
+      </div>
 
       <div className="flex justify-center h-[80vh] pb-10  sm:w-full">
         <dotlottie-player
@@ -21,10 +21,10 @@ function PageNotFound() {
         ></dotlottie-player>
       </div>
       <div className="bg-white text-black flex justify-center flex  py-10">
-        <Link to={'/dashboard'} >
-        <div className='w-60 h-[1px] bg-sixth '></div>
-            --- Back to dashboard page ---
-            <div className='w-60 h-[1px] bg-sixth'></div>
+        <Link to={"/dashboard"}>
+          <div className="w-60 h-[1px] bg-sixth "></div>
+          --- Back to dashboard page ---
+          <div className="w-60 h-[1px] bg-sixth"></div>
         </Link>
       </div>
     </div>

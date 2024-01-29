@@ -3,22 +3,17 @@ import SectionTile2 from "../../Components/SectionTile2";
 import { useSelector } from "react-redux";
 
 function About2() {
-
-    const { portfolioData } = useSelector((state)=>state.root)
-    const { about } = portfolioData;
-    const { skills ,lottieURL, description1 , description2 } = about;
+  const { portfolioData } = useSelector((state) => state.root);
+  const { about } = portfolioData;
+  const { skills, lottieURL, description1, description2 } = about;
 
   return (
     <div>
       <SectionTile2 title="About" />
       <div className="mx-20 flex px-10 gap-10 w-full items-center sm:mx-2 sm:flex-col">
-      <div className="flex flex-col gap-5 w-1/2 sm:w-full ">
-          <p className="text-fifth ">
-            {description1 || ""}
-          </p>
-          <p className="text-fifth ">
-            {description2 || ""}
-          </p>
+        <div className="flex flex-col gap-5 w-1/2 sm:w-full ">
+          <p className="text-fifth ">{description1 || ""}</p>
+          <p className="text-fifth ">{description2 || ""}</p>
         </div>
         <div className="h-full w-[500px] sm:w-full">
           {/* <dotlottie-player
@@ -27,9 +22,8 @@ function About2() {
             speed="1"
             autoplay
           ></dotlottie-player> */}
-          <img src={lottieURL}  alt="About Me" />
+          <img src={lottieURL} alt="About Me" />
         </div>
-       
       </div>
 
       <div className="py-10 mx-20">
@@ -44,7 +38,6 @@ function About2() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

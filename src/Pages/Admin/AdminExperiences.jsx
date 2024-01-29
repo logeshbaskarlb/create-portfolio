@@ -5,7 +5,6 @@ import { HideLoading, ReloadData, Showloading } from "../../redux/rootSlice";
 import axios from "axios";
 import { config } from "../../config/Config";
 
-
 function AdminExperiences() {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
@@ -20,13 +19,17 @@ function AdminExperiences() {
       let response;
       if (selectedItemForEdit) {
         response = await axios.post(
-          `${config.userApi}/api/portfolio/update-experience`, {
-          ...values,
-          _id: selectedItemForEdit._id,
-        });
+          `${config.userApi}/api/portfolio/update-experience`,
+          {
+            ...values,
+            _id: selectedItemForEdit._id,
+          }
+        );
       } else {
         response = await axios.post(
-        `${config.userApi}/api/portfolio/update-contact`, values);
+          `${config.userApi}/api/portfolio/update-contact`,
+          values
+        );
       }
 
       dispatch(HideLoading());
@@ -49,9 +52,11 @@ function AdminExperiences() {
     try {
       dispatch(Showloading());
       const response = await axios.post(
-        `${config.userApi}/api/portfolio/delete-experience`,{
-        _id: item._id,
-      });
+        `${config.userApi}/api/portfolio/delete-experience`,
+        {
+          _id: item._id,
+        }
+      );
       dispatch(HideLoading());
       if (response.data.success) {
         message.success(response.data.message);
@@ -68,10 +73,10 @@ function AdminExperiences() {
 
   return (
     <div>
-       <p className="flex absolute  justify-start p-2">
-          <span className="text-red-500 ">*Note :</span>
-         Don't leave any field.
-        </p>
+      <p className="flex absolute  justify-start p-2">
+        <span className="text-red-500 ">*Note :</span>
+        Don't leave any field.
+      </p>
       <div className="flex justify-end">
         <button
           className="bg-primary px-5 py-2 text-white"

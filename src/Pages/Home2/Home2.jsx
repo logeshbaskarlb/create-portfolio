@@ -15,49 +15,50 @@ import { toast } from "react-toastify";
 function Home2() {
   const { portfolioData } = useSelector((state) => state.root);
   const pdfExportComponent = useRef(null);
-  const navigate = useNavigate()
-  const EditButton = ()=>{
-    navigate('/admin')
-  }
-  
+  const navigate = useNavigate();
+  const EditButton = () => {
+    navigate("/admin");
+  };
+
   useEffect(() => {
-    toast.warning('Refresh the page to get the data , Updated !', {
+    toast.warning("Refresh the page to get the data , Updated !", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 3000, // 3 seconds
     });
   }, []);
-  
+
   const handleExportWithComponent = (event) => {
     pdfExportComponent.current.save();
   };
 
-return (
-  <div>
-    {portfolioData && (
-      <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
-        <div className="bg-fourth  px-40 sm:px-8">
-          <Intro2 />
-          <About2 />
-          <Experience2 />
-          <Project2 />
-          <Contact2 />
-          <Footer2 />
-          <LeftSide2 />
-        </div>
-      </PDFExport>
-    )}
-     <div className="flex justify-center m-10 pb-5">
-      <Button primary={true} 
-      className=" bg-sixth text-white"
-      onClick={handleExportWithComponent}>
-        Export Portfolio
-      </Button>
-      <Button className=" bg-sixth text-white"
-      onClick={EditButton}>
-        Edit
-      </Button>
+  return (
+    <div>
+      {portfolioData && (
+        <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
+          <div className="bg-fourth  px-40 sm:px-8">
+            <Intro2 />
+            <About2 />
+            <Experience2 />
+            <Project2 />
+            <Contact2 />
+            <Footer2 />
+            <LeftSide2 />
+          </div>
+        </PDFExport>
+      )}
+      <div className="flex justify-center m-10 pb-5">
+        <Button
+          primary={true}
+          className=" bg-sixth text-white"
+          onClick={handleExportWithComponent}
+        >
+          Export Portfolio
+        </Button>
+        <Button className=" bg-sixth text-white" onClick={EditButton}>
+          Edit
+        </Button>
+      </div>
     </div>
-  </div>
   );
 }
 

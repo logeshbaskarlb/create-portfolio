@@ -1,23 +1,26 @@
-import React from 'react'
-import SectionTile2 from '../../Components/SectionTile2'
-import { useSelector } from 'react-redux';
+import React from "react";
+import SectionTile2 from "../../Components/SectionTile2";
+import { useSelector } from "react-redux";
 
 function Contact2() {
-    const { portfolioData } = useSelector((state) => state.root);
-    const { contact } = portfolioData;
-    
+  const { portfolioData } = useSelector((state) => state.root);
+  const { contact } = portfolioData;
+
   return (
     <div>
-        <SectionTile2 title="Say Hello !" />
-        <div className="flex sm:flex-col items-center justify-between">
+      <SectionTile2 title="Say Hello !" />
+      <div className="flex sm:flex-col items-center justify-between">
         <div className="flex flex-col ">
           <p className="text-fifth">{"{"}</p>
-          {Object.keys(contact).map((key) => (
-            key !== '_id' &&  <p className="ml-5 text-fifth">
-              <span className="text-fifth">{key}</span> :{" "}
-              <span className="text-sixth">{contact[key]} </span>
-            </p>
-          ))}
+          {Object.keys(contact).map(
+            (key) =>
+              key !== "_id" && (
+                <p className="ml-5 text-fifth">
+                  <span className="text-fifth">{key}</span> :{" "}
+                  <span className="text-sixth">{contact[key]} </span>
+                </p>
+              )
+          )}
           <p className="text-fifth">{"}"}</p>
         </div>
 
@@ -30,9 +33,8 @@ function Contact2() {
           ></dotlottie-player>
         </div>
       </div>
-       
     </div>
-  )
+  );
 }
 
-export default Contact2
+export default Contact2;

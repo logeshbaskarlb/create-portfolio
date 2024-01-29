@@ -4,20 +4,23 @@ import { useSelector } from "react-redux";
 
 function Contact() {
   const { portfolioData } = useSelector((state) => state.root);
-  const { contact  } = portfolioData;
-  
+  const { contact } = portfolioData;
+
   return (
     <div>
       <SectionTitle title="Say Hello !" />
       <div className="flex sm:flex-col items-center justify-between">
         <div className="flex flex-col ">
           <p className="text-tertiary">{"{"}</p>
-          {Object.keys(contact).map((key) => (
-            key !== '_id' &&  <p className="ml-5 text-tertiary">
-              <span className="text-tertiary">{key}</span> :{" "}
-              <span className="text-tertiary">{contact[key]} </span>
-            </p>
-          ))}
+          {Object.keys(contact).map(
+            (key) =>
+              key !== "_id" && (
+                <p className="ml-5 text-tertiary">
+                  <span className="text-tertiary">{key}</span> :{" "}
+                  <span className="text-tertiary">{contact[key]} </span>
+                </p>
+              )
+          )}
           <p className="text-tertiary">{"}"}</p>
         </div>
 
@@ -27,8 +30,11 @@ function Contact() {
             background="transparent"
             autoplay
           ></dotlottie-player> */}
-          <img src="https://cdn.pixabay.com/photo/2016/12/15/12/24/contact-us-1908762_1280.png" alt=""
-          width={"750px"} />
+          <img
+            src="https://cdn.pixabay.com/photo/2016/12/15/12/24/contact-us-1908762_1280.png"
+            alt=""
+            width={"750px"}
+          />
         </div>
       </div>
     </div>
