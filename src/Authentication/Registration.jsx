@@ -7,7 +7,7 @@ import {  setLoading, setShowPassword } from "../redux/rootSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import LoadingPage from "../Loading/LoadingPage";
-
+import { config } from "../config/Config"
 function Registration() {
   const { showPassword, loading } = useSelector((state) => state.root);
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function Registration() {
       try {
         dispatch(setLoading(true));
         const response = await axios.post(
-         "/register", values);
+         `${config.userApi}/register`, values);
         if (response.status === 201) {
           toast.success(response.data.message, {
             position: "top-center",
