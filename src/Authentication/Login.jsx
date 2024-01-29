@@ -38,12 +38,13 @@ function Login() {
         dispatch(Showloading(true));
         await login(values);
         navigate("/dashboard");
+        dispatch(HideLoading());
         toast.success('You are logged in successfully');
       } catch (error) {
         formik.setErrors({ general: error.message });
         toast.error('Username or Password is incorrect');
       } finally {
-        dispatch(HideLoading());
+        dispatch(Showloading(false));
       }
     },
   });

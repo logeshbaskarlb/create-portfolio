@@ -16,6 +16,7 @@ import ForgetPassword from "./Authentication/ForgetPassword"
 import ResetPassword from "./Authentication/ResetPassword"
 import Pdf2 from "./PDF2/Pdf2";
 import { ToastContainer } from 'react-toastify';
+import {config} from './config/Config'
 
 function App() {
 
@@ -28,7 +29,8 @@ function App() {
     try {
       dispatch(Showloading(true));
       dispatch(HideLoading());
-      const response = await axios.get("/api/portfolio/get-portfolio-data");
+      const response = await axios.get(
+      `${config.userApi}/api/portfolio/get-portfolio-data`);
       dispatch(SetPortfolioData(response.data));
       dispatch(ReloadData(false));
     } catch (error) {

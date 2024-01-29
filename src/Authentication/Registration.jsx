@@ -46,8 +46,8 @@ function Registration() {
             position: "top-center",
           })
         }
-        navigate("/");    
         dispatch(HideLoading())
+        navigate("/");    
       } catch (error) {
         console.error("Error during registration:", error.message);
         toast.error(
