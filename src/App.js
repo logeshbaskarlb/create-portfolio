@@ -19,7 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import {config} from './config/Config'
 
 function App() {
-
+    
   const dispatch  = useDispatch();
   const {  portfolioData , reloadData } = useSelector((state) => state.root);
 
@@ -28,7 +28,7 @@ function App() {
       dispatch(Showloading(true));
       dispatch(HideLoading());
       const response = await axios.get(
-      `${config.userApi}api/portfolio/get-portfolio-data`);
+      `${config.userApi}/api/portfolio/get-portfolio-data`);      
       dispatch(SetPortfolioData(response.data));
       dispatch(ReloadData(false));
     } catch (error) {

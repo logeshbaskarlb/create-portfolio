@@ -1,14 +1,12 @@
 import React from "react";
 import image from "../Images/image.png";
 import image2 from "../Images/image2.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedHome } from "../redux/rootSlice";
-import { logout } from "../Components/Protect/AuthService";
 function Dashboard() {
   const selectedHome = useSelector((state) => state.root.selectedHome);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleSelectHome = (homeKey) => {
     console.log(homeKey);
     dispatch(setSelectedHome(homeKey));

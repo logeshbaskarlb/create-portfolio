@@ -5,7 +5,7 @@ import { PDFExport } from "@progress/kendo-react-pdf";
 import Home from "../../Pages/Home/Home";
 import Home2 from "../../Pages/Home2/Home2";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 function Pdf() {
@@ -14,7 +14,7 @@ function Pdf() {
   const setNewValue = useSelector((state) => state.root.selectedHome);
   const location = useLocation();
   const updatedContact = location.state?.updatedContact;
-  const [selectHome, setSelectedHome] = useState(updatedContact ? "home2" : "home1");
+  const [selectHome] = useState(updatedContact ? "home2" : "home1");
   console.log("selected Home :", selectHome);
 
   let pdfExportComponent;
