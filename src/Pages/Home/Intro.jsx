@@ -7,15 +7,15 @@ function Intro() {
   const { firstName ,lastName , welcomeText , description , caption } = intro
 
   return (
-    <div className='mx-20 pt-20 h-[80vh] bg-primary flex flex-col items-start justify-center gap-5 py-10 '>
-        <h1 className='text-white text-2xl'>{welcomeText || '' }</h1>
-        <h1 className='text-7xl md:text-4xl text-secondary font-semibold'>
+    <div className='h-[80vh] bg-primary flex flex-col items-start justify-center gap-5 py-10 '>
+        <h1 className='text-white text-2xl '>{welcomeText || '' }</h1>
+        <h1 className='text-7xl md:text-4xl  text-secondary font-semibold'>
             {firstName || ''} {lastName || ''}
         </h1>
-        <h1 className='text-5xl md:text-3xl text-white font-semibold'> 
+        <h1 className='text-5xl md:text-3xl text-white font-semibold '> 
             {caption || ''}
         </h1>
-        <p className='text-white  text-xl md:text-sm w-2/3'>
+        <p className='text-white  md:text-sm w-2/3'>
            {description || ''}
         </p>
 

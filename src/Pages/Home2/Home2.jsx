@@ -11,6 +11,7 @@ import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Header2 from "../../Components/Header2"
 
 function Home2() {
   const { portfolioData } = useSelector((state) => state.root);
@@ -33,6 +34,7 @@ function Home2() {
 
   return (
     <div>
+      <Header2 />
       {portfolioData && (
         <PDFExport ref={pdfExportComponent} paperSize={"auto"}>
           <div className="bg-fourth  px-40 md:px-8 md:py-5">
