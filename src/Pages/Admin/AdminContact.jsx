@@ -28,7 +28,7 @@ function AdminContact() {
       }
     } catch (error) {
       dispatch(HideLoading());
-      message.error(error.message);
+      message.error("Enter all the details");
     }
   };
 

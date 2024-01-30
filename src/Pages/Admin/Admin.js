@@ -51,16 +51,16 @@ function Admin() {
 
       <Header />  
       <div className="flex gap-10 items-center px-5 py-2 justify-between">
-        <div className="flex gap-10 items-center">
+        <div className="flex gap-10 items-center justify-evenly">
           <h1 className="text-3xl text-primary">Portfolio Admin</h1>
-          <div className="w-60 h-[1px] bg-gray-500"></div>
-        </div>
+          <div className="w-60 h-[1px] bg-gray-500 md:hidden"></div>
         <h1
-          className="underline text-secondary bg-primary rounded p-3 text-xl cursor-pointer"
+          className="underline flex justify-end  text-secondary bg-primary rounded p-3 text-xl cursor-pointer"
           onClick={handleLogout}
         >
           Logout
         </h1>
+        </div>
       </div>
    {portfolioData ? (
         <div  className="px-5">

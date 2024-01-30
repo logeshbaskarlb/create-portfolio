@@ -27,6 +27,12 @@ function Home2() {
       autoClose: 3000, // 3 seconds
     });
   }, []);
+  useEffect(() => {
+    toast.warning("Scroll down to download", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000, // 3 seconds
+    });
+  }, []);
 
   const handleExportWithComponent = (event) => {
     pdfExportComponent.current.save();

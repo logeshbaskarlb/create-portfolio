@@ -19,7 +19,13 @@ function Home() {
   const pdfExportComponent = useRef(null);
 
   useEffect(() => {
-    toast.warning("Refresh the page to get the data , Updated !", {
+    toast.warning("Refresh the page to get the Updated data ", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 5000, // 3 seconds
+    });
+  }, []);
+  useEffect(() => {
+    toast.warning("Scroll down to download", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 3000, // 3 seconds
     });

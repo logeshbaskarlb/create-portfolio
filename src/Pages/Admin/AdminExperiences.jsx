@@ -27,7 +27,7 @@ function AdminExperiences() {
         );
       } else {
         response = await axios.post(
-          `${config.userApi}/api/portfolio/update-contact`,
+          `${config.userApi}/api/portfolio/add-experience`,
           values
         );
       }
@@ -63,7 +63,7 @@ function AdminExperiences() {
         dispatch(HideLoading());
         dispatch(ReloadData(true));
       } else {
-        message.error(response.data.message);
+        message.error("Enter all the details");
       }
     } catch (error) {
       dispatch(HideLoading());
@@ -88,7 +88,7 @@ function AdminExperiences() {
           Add Experience
         </button>
       </div>
-      <div className="grid grid-cols-4 gap-5 mt-5 sm:grid-cols-1">
+      <div className="grid grid-cols-4 gap-5 mt-5 md:grid-cols-1">
         {experiences?.map((experience, key) => (
           <div key={key} className="shadow border p-5 border-gray-400">
             <h1 className="text-primary text-xl font-bold">

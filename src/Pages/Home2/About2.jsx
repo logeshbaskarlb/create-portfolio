@@ -11,11 +11,11 @@ function About2() {
     <div>
       <SectionTile2 title="About" />
       <div className="mx-20 flex px-10 gap-10 w-full items-center md:mx-2 md:flex-col">
-        <div className="flex flex-col gap-5 w-1/2 md:w-full ">
+        <div className="flex flex-col gap-5  w-full sm:w-full ">
           <p className="text-fifth ">{description1 || ""}</p>
           <p className="text-fifth ">{description2 || ""}</p>
         </div>
-        <div className="h-full w-[500px] md:w-full">
+        <div className="h-full  w-1/2 md:w-3/5 sm:w-full">
           {/* <dotlottie-player
             src="https://lottie.host/4cd315a8-7321-4684-8941-f5661bd17891/PbKhCG39LH.json"
             background="transparent"

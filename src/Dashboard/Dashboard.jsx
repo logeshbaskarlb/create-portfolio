@@ -29,12 +29,12 @@ function Dashboard() {
   ];
 
   return (
-    <div className="bg-primary h-[100%] m-0 p-0">
+    <div className="bg-primary h-full m-0 p-0">
       <div
         name=""
-        className="bg-gradient-to-b from-black to-gray-800 w-full text-white sm:h-screen text-center "
+        className="bg-gradient-to-b from-black to-gray-800 w-full text-white h-full text-center "
       >
-        <div className=" p-4  flex flex-col  ">
+        <div className="p-4 flex flex-col  ">
           <div className="pb-8">
             <p className="text-4xl font-bold inline border-b-4 border-gray-500">
               Welcome to Dashboard
@@ -47,7 +47,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 grid-cols-3 mx-10 gap-8 sm:px-5">
+          <div className="grid md:grid-cols-1 grid-cols-2 mx-8 gap-8 md:px-5">
             {items.map(({ id, src, link, homeKey }) => (
               <div
                 key={id}
@@ -76,7 +76,7 @@ function Dashboard() {
               </div>
             ))}
           </div>
-          <div className="m-10 p-40 text-7xl text-gray-700 hover:text-white">
+          <div className="m-10 p-40 text-5xl items-center text-gray-700 md:text-3xl hover:text-white">
             Coming Soon <span>...</span>
           </div>
         </div>

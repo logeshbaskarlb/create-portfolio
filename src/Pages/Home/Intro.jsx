@@ -8,7 +8,7 @@ function Intro() {
 
   return (
     <div className='h-[80vh] bg-primary flex flex-col items-start justify-center gap-5 py-10 '>
-        <h1 className='text-white text-2xl '>{welcomeText || '' }</h1>
+        <h1 className='text-white '>{welcomeText || '' }</h1>
         <h1 className='text-7xl md:text-4xl  text-secondary font-semibold'>
             {firstName || ''} {lastName || ''}
         </h1>
@@ -16,7 +16,7 @@ function Intro() {
             {caption || ''}
         </h1>
         <p className='text-white  md:text-sm w-2/3'>
-           {description || ''}
+           {description || ''}s
         </p>
 
         

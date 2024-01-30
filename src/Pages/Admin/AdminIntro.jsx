@@ -21,7 +21,7 @@ function AdminIntro() {
       if (response.data.success) {
         message.success(response.data.message);
       } else {
-        message.error(response.data.message);
+        message.error("Enter all the details");
       }
     } catch (error) {
       dispatch(HideLoading());

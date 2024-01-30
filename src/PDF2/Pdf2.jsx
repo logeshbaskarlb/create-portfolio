@@ -27,7 +27,7 @@ function Pdf2() {
     <div className="bg-primary h-[100%] m-0 p-0">
       <div
         name=""
-        className="bg-gradient-to-b from-black to-gray-800 w-full text-white sm:h-screen text-center sm:text-left"
+        className="bg-gradient-to-b from-black to-gray-800 w-full text-white h-full text-center "
       >
         <div className=" p-4  flex flex-col justify-evenly ">
           <div className="pb-8">
@@ -40,7 +40,7 @@ function Pdf2() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 grid-cols-3 mx-10 gap-8 sm:px-5">
+          <div className="grid md:grid-cols-1 grid-cols-2 mx-8 gap-8 md:px-5">
             {items.map(({ id, src, link }) => (
               <div
                 key={id}
@@ -62,7 +62,7 @@ function Pdf2() {
               </div>
             ))}
           </div>
-          <div className="m-10 p-40 text-7xl text-gray-700 hover:text-white">
+          <div className="m-10 p-40 text-5xl text-gray-700 hover:text-white">
             Coming Soon <span>...</span>
           </div>
         </div>

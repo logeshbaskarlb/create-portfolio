@@ -20,11 +20,11 @@ function AdminProjects() {
       dispatch(Showloading());
       let response;
       if (selectedItemForEdit) {
-        response = await axios.post(`/api/portfolio/update-project`, {
+        response = await axios.post(`${config.userApi}/api/portfolio/update-project`, {
           ...values,
           _id: selectedItemForEdit._id,
         });
-      } else {
+      }else{
         response = await axios.post(
           `${config.userApi}/api/portfolio/add-project`,
           values
@@ -61,7 +61,7 @@ function AdminProjects() {
         message.success(response.data.message);
         dispatch(ReloadData(true));
       } else {
-        message.error(response.data.message);
+        message.error("Enter all the details");
       }
     } catch (error) {
       dispatch(HideLoading());
@@ -82,7 +82,7 @@ function AdminProjects() {
           Add Projects
         </button>
       </div>
-      <div className="grid grid-cols-4 gap-5 mt-5 sm:grid-cols-1">
+      <div className="grid grid-cols-3 gap-5 mt-5 md:grid-cols-1 md:w-full">
         {projects?.map((project, key) => (
           <div key={key} className="shadow border p-5 border-gray-400">
             <h1 className="text-primary text-xl font-bold">{project.title}</h1>
