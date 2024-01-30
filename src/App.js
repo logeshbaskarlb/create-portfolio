@@ -20,26 +20,21 @@ import {config} from './config/Config'
 
 function App() {
 
-  
   const dispatch  = useDispatch();
   const {  portfolioData , reloadData } = useSelector((state) => state.root);
-
 
   const getPortfolioData = async () => {
     try {
       dispatch(Showloading(true));
       dispatch(HideLoading());
       const response = await axios.get(
-      `${config.userApi}/api/portfolio/get-portfolio-data`);
+      `${config.userApi}api/portfolio/get-portfolio-data`);
       dispatch(SetPortfolioData(response.data));
       dispatch(ReloadData(false));
     } catch (error) {
       dispatch(HideLoading());
     }
   };
-  
-  
-
   useEffect(() => {
     console.log(portfolioData)
     if (!portfolioData) {
@@ -56,7 +51,6 @@ function App() {
   return (
     <>
      <BrowserRouter>
-      
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Registration />} />
