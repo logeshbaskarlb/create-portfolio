@@ -32,9 +32,9 @@ function Dashboard() {
     <div className="bg-primary h-[100%] m-0 p-0">
       <div
         name=""
-        className="bg-gradient-to-b from-black to-gray-800 w-full text-white sm:h-screen text-center sm:text-left"
+        className="bg-gradient-to-b from-black to-gray-800 w-full text-white sm:h-screen text-center "
       >
-        <div className=" p-4  flex flex-col justify-evenly ">
+        <div className=" p-4  flex flex-col  ">
           <div className="pb-8">
             <p className="text-4xl font-bold inline border-b-4 border-gray-500">
               Welcome to Dashboard
