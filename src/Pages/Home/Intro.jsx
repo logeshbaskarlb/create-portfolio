@@ -18,6 +18,8 @@ function Intro() {
         <p className='text-white  text-xl md:text-sm w-2/3'>
            {description || ''}
         </p>
+
+        
         <button className='border-2 border-tertiary text-tertiary px-10 py-3 rounded'>
             Get Into It
         </button>
