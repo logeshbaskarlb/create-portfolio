@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { setLoading, setShowPassword } from "../redux/rootSlice";
+import { HideLoading, setLoading, setShowPassword } from "../redux/rootSlice";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingPage from "../Loading/LoadingPage";
 import { toast } from "react-toastify";
 import { isAuthenticated, login } from "../Components/Protect/AuthService";
-
+import Loader from "../Components/Loader";
 function Login() {
   const { showPassword, loading } = useSelector((state) => state.root);
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function Login() {
         formik.setErrors({ general: error.message });
         toast.error("Username or Password is incorrect");
       } finally {
-        dispatch(setLoading(false));
+        dispatch(HideLoading(false));
       }
     },
   });
@@ -53,8 +53,13 @@ function Login() {
       navigate("/dashboard");
     }
   }, [navigate]);
+
+
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
+    <>
+    { loading ? <Loader /> :
+     <div className="min-h-screen flex items-center justify-center bg-primary kvnkjabvav">
       <div className="max-w-sm w-full space-y-8 p-4 bg-white rounded shadow-sm">
         <h2 className="mt-3 text-center text-2xl font-bold">Welcome</h2>
         <p className="text-center text-gray-600 my-2">Login to your account</p>
@@ -136,6 +141,7 @@ function Login() {
               className="w-full px-4 py-2 text-white bg-black rounded-sm"
             >
               {loading ? <LoadingPage /> : "Login"}
+              {/* Login */}
             </button>
           </div>
         </form>
@@ -150,7 +156,8 @@ function Login() {
           </div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 }
 
