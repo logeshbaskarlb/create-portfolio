@@ -36,7 +36,7 @@ function App() {
     }
   };
   useEffect(() => {
-    console.log(portfolioData)
+    // console.log(portfolioData)
     if (!portfolioData) {
       getPortfolioData();
     }

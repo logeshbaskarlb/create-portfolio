@@ -15,7 +15,7 @@ function Contact() {
           {Object.keys(contact).map(
             (key) =>
               key !== "_id" && (
-                <p className="ml-5 text-tertiary">
+                <p key={key} className="ml-5 text-tertiary">
                   <span className="text-tertiary">{key}</span> :{" "}
                   <span className="text-tertiary">{contact[key]} </span>
                 </p>

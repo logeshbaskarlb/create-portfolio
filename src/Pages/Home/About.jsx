@@ -6,7 +6,7 @@ function About() {
   const { portfolioData } = useSelector((state) => state.root);
   const { about } = portfolioData;
   const { skills, lottieURL, description1, description2 } = about;
-  console.log(portfolioData);
+  // console.log(portfolioData);
   return (
     <div>
       <SectionTitle title="About" />
@@ -31,8 +31,8 @@ function About() {
           Here are a few technologies I've been working with recently:
         </h1>
         <div className="flex flex-wrap gap-10">
-          {skills.map((skill, index) => (
-            <div className="border border-tetertiary py-3 px-10">
+          {skills.map((skill, key) => (
+            <div key={key} className="border border-tetertiary py-3 px-10">
               <h1 className="text-tertiary ">{skill}</h1>
             </div>
           ))}
